@@ -1,13 +1,56 @@
-# step-04 目前已完成，你可以完整运行
-step-04 是在 step-03 的基础上开发的  
-step-04 主要围绕redux, 进行构建，做了四个基于redux的基础示例（简单，一般，复杂，异步）。  
-展示了在应用了redux的react项目中，组件之间的数据是如何获取，传递，并渲染到页面的。
-（该模板为React-Study最后一个系列，欢迎朋友们沟通交流，让前端开发变的更美好。）
+高清方案布局
 
-## [DEMO](https://raw.githubusercontent.com/minooo/test/master/step-04-demo.gif)
-点击上方DEMO预览
+ // flex模式
+<script>!function(e){function t(a){if(i[a])return i[a].exports;var n=i[a]={exports:{},id:a,loaded:!1};return e[a].call(n.exports,n,n.exports,t),n.loaded=!0,n.exports}var i={};return t.m=e,t.c=i,t.p="",t(0)}([function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=window;t["default"]=i.flex=function(e,t){var a=e||100,n=t||1,r=i.document,o=navigator.userAgent,d=o.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i),l=o.match(/U3\/((\d+|\.){5,})/i),c=l&&parseInt(l[1].split(".").join(""),10)>=80,p=navigator.appVersion.match(/(iphone|ipad|ipod)/gi),s=i.devicePixelRatio||1;p||d&&d[1]>534||c||(s=1);var u=1/s,m=r.querySelector('meta[name="viewport"]');m||(m=r.createElement("meta"),m.setAttribute("name","viewport"),r.head.appendChild(m)),m.setAttribute("content","width=device-width,user-scalable=no,initial-scale="+u+",maximum-scale="+u+",minimum-scale="+u),r.documentElement.style.fontSize=a/2*s*n+"px"},e.exports=t["default"]}]);
+flex(100, 1);</script>
+这是ant-design-mobile的高清方案布局代码，所谓高清方案就是根据设备屏幕的DPR（设备像素比，又称DPPX，比如dpr=2时，表示1个CSS像素由4个物理像素点组成） 动态设置 html 的font-size, 同时根据设备DPR调整页面的缩放值，进而达到高清效果。
+有何优势?
 
-## 本模板包含step-03用到的所有包，下面将介绍 **额外** 添加的包
+引用简单，布局简便
+根据设备屏幕的DPR,自动设置最合适的高清缩放。
+保证了不同设备下视觉体验的一致性。
+有效解决移动端真实1px问题
+如何使用?
+
+只需要把上面的js代码放到head里面就行了。
+将你的效果图等比例缩放至640px宽，然后量取效果图上的元素尺寸，用rem做单位进行布局
+比如某个元素宽35px，样式写为width: 0.35rem。
+对于图片的尺寸，如果是全屏图片，请保证其样式拥有以下设置
+.yourImg {
+    display: block;
+    width: 100%
+}
+本人心得，关于图片，比如640px宽度的效果图下，你量取某图片宽120px, 高80px, 它的样式应该是width: 1.2rem; height: 0.8rem 没问题，但是图片实际尺寸应该是此基础上的1.5倍，即图片应该宽180px, 高120px，这是因为现在很多设备的屏幕的DPR达到了3的水平。如此，图片在次屏幕上会“高清显示”。
+本模板包含step-02用到的所有包，下面将介绍 额外 添加的包
+
+react-router [必需]
+
+React Router 一个针对 React 而设计的路由解决方案、可以友好的帮你解决 React components 到 URl 之间的同步映射关系。
+推荐教程 React Router 使用教程
+安装：npm install react-router --save
+antd-mobile [强烈推荐]
+
+antd的移动端版本
+安装：npm install antd-mobile --save
+rc-form [搭配antd-mobile必需]
+
+antd-mobile 表单组件需要
+安装：npm install rc-form --save-dev
+babel-plugin-import [搭配antd-mobile必需]
+
+Modular antd build plugin for babel，让antd-mobile 中模块组件的引入实现按需加载
+安装：npm install babel-plugin-import --save-dev
+postcss-pxtorem [antd-mobile高清方案需要]
+
+顾名思义，就是将px转化为rem的小插件，实际生产中，我们完全可以直接写rem,这个小插件就是为antd-mobile 的样式服务的。
+使用方法参照高清方案,另外特别指出，在此基础上还需在webpack.config.js上配置
+
+{
+    test: /\.css$/,
+    include: /node_modules/,
+    loader: 'style!css!postcss'
+}
+安装：npm install babel-plugin-antd --save-dev
 
 #### [redux](https://github.com/reactjs/redux) [必需]
 > Redux 是 JavsScript 状态容器，提供可预测化的状态管理  
