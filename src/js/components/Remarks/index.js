@@ -5,21 +5,22 @@
 
 import React, { Component } from 'react'
 import styles from './index.scss'
-import {Toast,List, TextareaItem,WingBlank, WhiteSpace,Card,Flex,Button } from 'antd-mobile';
+import {List, TextareaItem,WingBlank, WhiteSpace,Card,Flex,Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
-import Prompt from '../common/propmpt';
+
 
  class Remarks extends  Component{
-
-     showToast=()=>{
-         Toast.info(<div id={styles.propmpt}>
-             '这是一个 toastsssssssssssssss 提示!!!'
-         </div>);
+     constructor(props){
+         super(props)
+     }
+     handleChange=()=>{
+      const {actions} =this.props;
+         actions.openPrompt("ssss")
      }
 
     render(){
 
-        const {list}=this.props;
+        const {list,posts}=this.props;
 
         return(
             <div>
@@ -47,7 +48,7 @@ import Prompt from '../common/propmpt';
                                            <Flex>
 
                                                <Flex.Item><div className="hor-center"><Button className="btn" onClick={
-                                                   this.showToast
+                                              this.handleChange
                                                } >保存备注</Button></div></Flex.Item>
 
                                            </Flex>
@@ -61,7 +62,7 @@ import Prompt from '../common/propmpt';
 
                         })
                     }
-                <Prompt />
+
             </div>
         )
     }

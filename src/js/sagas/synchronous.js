@@ -27,12 +27,12 @@ import {
     CLOSE_THE_WINDOW
 } from '../actions/actionsTypes'
 
+
+//prompt
 function* openPrompt() {
     yield call(delay,2000);
     yield put({type: CLOSE_THE_WINDOW})
 }
-
-
 export function* prompt() {
 
     while( yield take(OPEN_THE_WINDOW) ){

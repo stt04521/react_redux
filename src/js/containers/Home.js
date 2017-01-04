@@ -6,8 +6,6 @@ import { is, fromJS} from 'immutable';
 import { bindActionCreators } from 'redux'
 import * as Actions from 'app/actions'
 
-
-@pureRender
 class Home extends Component {
   state =
   {
@@ -111,11 +109,9 @@ class Home extends Component {
     //   alert(data)
     // },"stt")
   }
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
-  // }
-
-
+  shouldComponentUpdate(nextProps, nextState) {
+    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
+  }
 
   render() {
   // console.log(this.getDate())

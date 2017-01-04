@@ -5,14 +5,12 @@
 import React, { Component } from 'react'
 import {Remarks,Prompt} from '../../components'
 import { connect } from 'react-redux';
-import pureRender from 'pure-render-decorator';
 import { is, fromJS} from 'immutable';
 import { bindActionCreators } from 'redux'
-import * as PostActions from 'app/actions/PostActions'
-import * as PromptActions from 'app/actions/PromptActions'
+import * as Actions from 'app/actions'
 
 
-@pureRender
+
  class  RemarksC extends Component{
     list=[
         {
@@ -28,25 +26,27 @@ import * as PromptActions from 'app/actions/PromptActions'
             "remark":"备注"
         }
     ]
-
+     shouldComponentUpdate(nextProps, nextState) {
+         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
+     }
 
      render(){
-
+        const {prompt} = this.props;
         return(
             <div>
-                <Remarks list={this.list}/>
-                <Prompt />
+                <Remarks list={this.list}  {...this.props}/>
+                <Prompt prompt={prompt} />
             </div>
         )
     }
 }
 const mapStateToProps = state => ({
-    state: state.posts
+    posts: state.posts.toJS(),
+    prompt:state.prompt.toJS()
 })
 
 const mapDispatchToProps = dispatch => ({
-    Post: bindActionCreators(PostActions, dispatch),
-    Prompt:bindActionCreators(PromptActions, dispatch)
+    actions: bindActionCreators(Actions, dispatch)
 })
 
 export default connect(

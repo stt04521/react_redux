@@ -9,7 +9,7 @@ import {
 import { createReducer } from 'redux-immutablejs'
 import Immutable from 'immutable';
 
-const init=Immutable.fromJS({flag:false})
+const init=Immutable.fromJS({flag:false,message:""})
 
 export default createReducer(init,{
     [OPEN_THE_WINDOW]:(state,action)=>state.merge({

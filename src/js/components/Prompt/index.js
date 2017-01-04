@@ -13,10 +13,10 @@ class Prompt extends React.Component{
 
     }
     render () {
-            const  {flag,message}=this.props;
+            const  {flag,message}=this.props.prompt;
          let style=flag?"show":"hide"
         return(
-            <div className={`show ${style}`} >
+            <div className={`pop_up1 ${style}`} >
                 <span>{message}</span>
             </div>
         )

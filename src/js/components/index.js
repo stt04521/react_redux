@@ -10,4 +10,4 @@ export { default as DeliverGoods } from './DeliverGoods'
 //备注组件
 export { default as Remarks } from './Remarks'
 //弹窗组件
-export {default as Prompt } from './common/propmpt'
+export {default as Prompt } from './Prompt'
