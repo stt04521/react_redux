@@ -9,29 +9,23 @@ export default class Nav extends Component {
         <div style={{height:'1.2rem'}}></div>
         <div className={styles.root}>
           <NavLink
-            pathUrl="/"
-            icoName={"i-zhuye42un"}
+            pathUrl="/index"
+            icoName={styles.dd}
             active={styles.navOne}
-            linkName="简单"
+            linkName="订单"
             onlyActiveOnIndex
           />
           <NavLink
-            pathUrl="/coupon"
-            icoName="i-youhui42un"
+            pathUrl="/index/GrabASingle"
+            icoName={styles.qd}
+            active={styles.navTwo}
+            linkName="抢单"
+          />
+          <NavLink
+            pathUrl="/index/Customer"
+            icoName={styles.sh}
             active={styles.navThree}
-            linkName="一般"
-          />
-          <NavLink
-            pathUrl="/tour"
-            icoName="i-zhoubian42un"
-            active={styles.navFour}
-            linkName="复杂"
-          />
-          <NavLink
-            pathUrl="/user"
-            icoName="i-wode42un"
-            active={styles.navFive}
-            linkName="异步"
+            linkName="售后"
           />
         </div>
       </div>

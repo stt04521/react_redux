@@ -1,33 +1,17 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-
-import { Nav, Counter } from '../../components'
-import * as CounterActions from '../../actions/CounterActions'
-
-class Coupon extends Component {
+import { Link } from 'react-router'
+import { Nav } from '../../components'
+export default class Coupon extends Component {
   render() {
-    const { counter, dispatch, asyncBool, asyncCountDown } = this.props
     return (
       <div className="box">
-        <Counter
-          counter={counter}
-          asyncBool={asyncBool}
-          asyncCountDown={asyncCountDown}
-          {...bindActionCreators(CounterActions, dispatch)}
-        />
+        <h1>Coupon</h1>
+        <p>
+          Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <Link to="coupon/11">详情</Link>
         <Nav />
       </div>
     )
   }
 }
-
-function select(state) {
-  return {
-    counter: state.counter,
-    asyncBool: state.counterAsync.asyncBool,
-    asyncCountDown: state.counterAsync.asyncCountDown
-  }
-}
-
-export default connect(select)(Coupon)

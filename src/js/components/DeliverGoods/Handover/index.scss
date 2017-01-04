@@ -1,0 +1,53 @@
+
+
+.option_item input{
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  border: none;
+  float: left;
+}
+.option_item label{
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  zoom: 1;
+  min-height: 40px;
+  display: block;
+  margin-left: -10px;
+  margin-right: 10px;
+  padding-left: 10px;
+  font-size: 32px;
+}
+.survey_form_ui{
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  float: left;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  display: inline-block;
+  zoom: 1;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 42px;
+  height: 42px;
+  margin-top: 6px;
+  margin-right: 5px;
+  border: 1px solid #b8b8b8;
+  background-color: #fafafa;
+  vertical-align: top;
+}
+
+.option_text p{
+  margin-top: 6px
+}
+.survey_form_checkbox[type="radio"]:checked+ label .survey_form_ui {
+  background-image: url("../../../../images/选中图标.svg");
+  -webkit-background-size: 100%;
+  background-size: 100%;
+  background-color: white;
+  border: none;
+}

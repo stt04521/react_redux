@@ -7,38 +7,86 @@
   color: #1abc9c;
 }
 // 重写radio样式
-.am-radio.am-radio-checked .am-radio-inner:after {
-  position: absolute;
-  z-index: 100;
-  content: '';
-  display: block;
-  width: 10px;
-  height: 10px;
-  left: 5px;
-  top: 5px;
-  background: #1abc9c;
-  border-radius: 50%;
-  border: none;
+//.am-radio.am-radio-checked .am-radio-inner:after {
+//  position: absolute;
+//  z-index: 100;
+//  content: '';
+//  display: block;
+//  width: 10px;
+//  height: 10px;
+//  left: 5px;
+//  top: 5px;
+//  background: #1abc9c;
+//  border-radius: 50%;
+//  border: none;
+//}
+//.am-wingblank.am-wingblank-lg {
+//  margin-left: 0.32rem;
+//  margin-right: 0.32rem;
+//}
+//.am-radio-inner:before {
+//  position: absolute;
+//  content: '';
+//  display: block;
+//  width: 20px;
+//  height: 20px;
+//  border: 1px solid #999;
+//  background: #fff;
+//  left: 0;
+//  top: 0;
+//  z-index: 100;
+//  border-radius: 50%;
+//  outline: 0;
+//}
+/*订单样式*/
+.am-card{
+  border-radius:0px;
+  box-shadow: 0px 5px 10px;
 }
-
-.am-radio-inner:before {
-  position: absolute;
-  content: '';
-  display: block;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #999;
-  background: #fff;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  border-radius: 50%;
-  outline: 0;
+.am-card-header-content img{
+  width: 36px;
 }
 
 .am-radio-inner {
   right: 3px;
 }
+.am-card-body{
+  border-top: 0px;
+
+}
+.am-flexbox.am-flexbox-align-top{
+  padding-left: 32px;
+}
+.am-card-footer{
+  padding: 0;
+}
+.am-flexbox .am-flexbox-item{
+  text-align: center;
+}
+//按钮样式
+.am-list .am-list-item.am-checkbox-item .am-list-thumb .am-checkbox-inner{
+  top:14px;
+}
+//按钮样式
+.am-button{
+
+  width: inherit;
+  line-height: normal;
+  height: auto;
+
+  display: inline-block;
+  outline: 0 none;
+  -webkit-appearance: none;
+  -webkit-box-sizing: border-box;
+  padding: 0.08rem 0.32rem 0.08rem 0.32rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  -webkit-background-clip: padding-box;
+  color: white;
+  background-color: rgba(235,96,0,0.8);
+  border: 1PX solid #ddd;
+}
+
 .am-button-primary:after {
   border-color: #1abc9c;
 }
@@ -47,4 +95,92 @@
 }
 .am-switch input[type="checkbox"]:checked + .checkbox, .am-button-primary {
   background: #1abc9c;
+}
+//详情列表样式
+.Details .am-list-item .am-list-line{
+   flex-direction: row-reverse;
+ }
+.Details .am-list-item .am-list-line .am-list-arrow{
+  display: none;
+}
+.Details  .am-list-item .am-list-line .am-list-extra {
+  flex: 0.3;
+  text-align: left;
+}
+.Details  .am-list-body div:not(:last-child) .am-list-line:after{
+  border-bottom: 0px;
+}
+
+.am-list-item .am-list-line-multiple{
+  padding: 0.08rem 0.3rem 0.04rem 0;
+}
+//列表字体调整
+.am-list-item .am-list-line .am-list-content{
+  font-size: 32px;
+}
+.am-list-item .am-list-line .am-list-extra{
+  font-size: 32px;
+}
+.am-list-item{
+  min-height: 0;
+}
+.am-list-item .am-list-line{
+  min-height: 0;
+}
+//弹窗样式
+.rodal-dialog{
+  padding: 32px;
+}
+.rodal-close{
+  width: 0.32rem;
+  height: 0.32rem;
+}
+.rodal-close:before, .rodal-close:after{
+  height:0.05rem;
+  background:#EF8033 ;
+}
+
+.am-list .am-list-item .am-input-control input{
+  line-height: inherit;
+}
+
+//选项卡切换
+.am-tabs-bar .am-tabs-tab{
+  color:#868686 ;
+}
+.am-tabs-bar .am-tabs-tab-active{
+  color:#EF8033 ;
+}
+.am-tabs-ink-bar{
+  background-color:#EF8033 ;
+}
+.am-textarea-control textarea{
+  border: 1px solid #BFBFBF;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+
+.am-card-body .am-list-item{
+  padding-left: 0;
+}
+
+//提示框样式
+.pop-up1 {
+  width: 85%;
+  background: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  border-radius: 10px;
+  color: #fff;
+  position: fixed;
+  letter-spacing: 2px;
+  bottom: 40%;
+  left: 7%;
+  box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.6);
+}
+.prompt {
+  z-index: 32;
+  line-height: 20px;
+  font-size: 16px;
+  padding: 16px;
 }

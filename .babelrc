@@ -9,6 +9,7 @@
     "stage-0"
   ],
   "plugins": [
+  "transform-decorators-legacy",
     "react-hot-loader/babel",
     ["import", { "style": "css", "libraryName": "antd-mobile" }],
     ["transform-runtime", {

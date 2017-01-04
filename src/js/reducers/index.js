@@ -1,18 +1,31 @@
+
+/**
+ * Created by shitengteng on 2016/12/30.
+ */
+
+// import { combineReducers } from 'redux-immutable';
+// import posts from './posts'
+//
+// const rootReducer = combineReducers({
+//     posts
+// });
+//
+// export default rootReducer;
+
+
+
 import { combineReducers } from 'redux'
-import counter from './counter'
-import todos from './todos'
-import showCongratulation from './showCongratulation'
-import counterAsync from './counterAsync'
-import timer from './timer'
 import posts from './posts'
+import {jySaleStatus,ctSaleTypes} from  './global'
+import requestData from './requestData'
+import prompt from  './prompt'
 
 const rootReducer = combineReducers({
-  counter,
-  counterAsync,
-  todos,
-  showCongratulation,
-  timer,
-  posts
+    posts,
+    jySaleStatus,
+    ctSaleTypes,
+    requestData,
+    prompt
 });
 
 export default rootReducer;
