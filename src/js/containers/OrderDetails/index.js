@@ -3,12 +3,6 @@
  */
 import React,{ Component } from 'react'
 import {ODetails} from '../../components'
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import * as Actions from 'app/actions'
-import pureRender from 'pure-render-decorator';
-import { is, fromJS} from 'immutable';
-
 
   class OrderDetails extends  Component{
       state={
@@ -47,40 +41,19 @@ import { is, fromJS} from 'immutable';
           CLOSED:"退款关闭",
           SUCCESS:"退款成功"
       }
-
-      componentDidMount() {
-          const { actions } = this.props
-          //触发获取数据的动作
-          actions.onRequestPosts(`https://api.github.com/users`,{id:11111})
-          // this.props.getData.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {
-          //   alert(data)
-          // },"stt")
-      }
     render(){
         let from = this.props.location.query.status
 
         return(
 
             <ODetails
-                state={this.props.posts}
+                state={this.state}
                 from={from}
                 {...this.props}
-                jySaleStatus={this.props.jySaleStatus}/>
+                jySaleStatus={this.jySaleStatus}/>
         )
     }
 }
 
-//获取状态树上的数据
-const mapStateToProps = state => ({
-    posts: state.posts.toJS(),
-    jySaleStatus:state.jySaleStatus.toJS()
-})
 
-//获取动作对象
-const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(Actions, dispatch)
-})
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(OrderDetails)
+export default  OrderDetails

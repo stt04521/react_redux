@@ -1,11 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {Nav,NoData,OrderData} from 'app/components'
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import * as Actions from 'app/actions'
 import pureRender from 'pure-render-decorator';
 import { is, fromJS} from 'immutable';
-
+import { bindActionCreators } from 'redux'
+import * as Actions from 'app/actions'
 
 class Home extends Component {
   state =
@@ -105,7 +104,7 @@ class Home extends Component {
 
   componentDidMount() {
     const { actions } = this.props
-   actions.onRequestPosts(`https://api.github.com/users`,{id:11111})
+   // actions.onRequestPosts('../../json/home.json')
     // this.props.getData.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {
     //   alert(data)
     // },"stt")
@@ -117,7 +116,7 @@ class Home extends Component {
   render() {
   // console.log(this.getDate())
     const {actions} = this.props
-    const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.props.posts
+    const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.state
     return (
         <div ref="box" className="box">
           {
@@ -139,7 +138,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  posts: state.posts.toJS(),
+  posts: state.posts,
   timer:state.timer.toJS()
 })
 

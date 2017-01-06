@@ -35,8 +35,8 @@ import {
 
 // 异步获取数据，开始！
 function fetchPostsApi(path,postData) {
-    // let url = Tool.target+path+Tool.paramType(postData)
-    return fetch(path)
+    let url = Tool.target+path+Tool.paramType(postData)
+    return fetch(url)
         .then(response => response.json())
         .then(json =>Promise.resolve(json))
 }
