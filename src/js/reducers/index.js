@@ -19,13 +19,15 @@ import posts from './posts'
 import {jySaleStatus,ctSaleTypes} from  './global'
 import requestData from './requestData'
 import prompt from  './prompt'
+import timer from  './timer'
 
 const rootReducer = combineReducers({
     posts,
     jySaleStatus,
     ctSaleTypes,
     requestData,
-    prompt
+    prompt,
+    timer
 });
 
 export default rootReducer;
