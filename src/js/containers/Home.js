@@ -104,18 +104,19 @@ class Home extends Component {
 
   componentDidMount() {
     const { actions } = this.props
-   actions.onRequestPosts(`https://api.github.com/users`,{id:11111})
+   actions.onRequestPosts(`http://localhost:9991/jymbms/order/list`,{'busiid':'8518800100000000006'})
     // this.props.getData.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {
     //   alert(data)
     // },"stt")
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
+  // }
 
   render() {
   // console.log(this.getDate())
-    const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.state
+    console.log(this.props.posts)
+    const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.props.posts.items
     return (
         <div ref="box" className="box">
           {
@@ -135,15 +136,17 @@ class Home extends Component {
     )
   }
 }
-
+//获取状态树状态与数据
 const mapStateToProps = state => ({
-  state: state.posts
+  posts: state.posts.toJS()
 })
 
+//获取动作对象
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(Actions, dispatch)
 })
 
+//把获取到的状态动作 传给组件
 export default connect(
     mapStateToProps,
     mapDispatchToProps
