@@ -15,7 +15,7 @@
 
 
 import { combineReducers } from 'redux'
-import posts from './posts'
+import {posts} from './posts'
 import {jySaleStatus,ctSaleTypes} from  './global'
 import requestData from './requestData'
 import prompt from  './prompt'

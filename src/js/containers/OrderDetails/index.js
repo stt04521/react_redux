@@ -3,6 +3,11 @@
  */
 import React,{ Component } from 'react'
 import {ODetails} from '../../components'
+import * as Actions from 'app/actions'
+import { connect } from 'react-redux';
+import { is, fromJS} from 'immutable';
+import pureRender from 'pure-render-decorator';
+import { bindActionCreators } from 'redux'
 
   class OrderDetails extends  Component{
       state={
@@ -41,19 +46,53 @@ import {ODetails} from '../../components'
           CLOSED:"退款关闭",
           SUCCESS:"退款成功"
       }
+      constructor(props) {
+          super(props);
+
+      }
+      componentDidMount() {
+          const { actions } = this.props
+          let from = this.props.location.query.status
+          // alert(from)
+          if(from=='qd'){
+              actions.onRequestPosts(`/changeorder/getchangOrderinfo`,{tid:"2795125709389997",source:"1"})
+
+          }else{
+
+          }
+      }
+      //
+      // componentDidMount() {
+      //     const { actions } = this.props
+      //     actions.onRequestPosts(`http://localhost:8082/jymbms/changeorder/changeorderList`)
+      // }
+
     render(){
         let from = this.props.location.query.status
-
+        let state= this.props.posts.items
+        console.log(state)
         return(
 
             <ODetails
-                state={this.state}
+                state={state}
                 from={from}
                 {...this.props}
-                jySaleStatus={this.jySaleStatus}/>
+                jySaleStatus={this.props.jySaleStatus}/>
         )
     }
 }
 
+//获取状态树 数据
+const mapStateToProps = state => ({
+    posts: state.posts.toJS(),
+    jySaleStatus:state.jySaleStatus.toJS()
+})
 
-export default  OrderDetails
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(Actions, dispatch),
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(OrderDetails)

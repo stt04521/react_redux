@@ -104,8 +104,8 @@ class Home extends Component {
 
   componentDidMount() {
     const { actions } = this.props
-   // actions.onRequestPosts('../../json/home.json')
-    // this.props.getData.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {
+    // actions.onRequestPosts('https://api.github.com/users')
+     //this.props.getData.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {
     //   alert(data)
     // },"stt")
   }
@@ -138,7 +138,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  posts: state.posts,
+  posts: state.posts.toJS(),
   timer:state.timer.toJS()
 })
 

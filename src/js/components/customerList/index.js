@@ -48,8 +48,8 @@ export default class CustomerList extends Component {
 
     render(){
         const {list,num,jySaleStatus,ctSaleTypes} =this.props;
-        let name = list[0].source==2?"九阳商城":"农村淘宝";
-        let JYtype={1:"仅退款",2:"退货退款"}
+        let name = list[0].source=="2"?"九阳商城":"农村淘宝";
+        let JYtype={"1":"仅退款","2":"退货退款"}
 
         return (
             <WingBlank>
@@ -58,8 +58,10 @@ export default class CustomerList extends Component {
                     <p className={styles.orderTitle}>{name}待处理{num}单售后</p>
                     <WhiteSpace size="sm" />
                     {list&&list.map((item,index)=>{
+                        console.log(item.SaleStatus)
                         let saleStatus = item.SaleStatus?jySaleStatus[item.SaleStatus]:""
-                        let saleType = item.SaleStatus?JYtype[item.type]:ctSaleTypes[item.type]
+
+                        let saleType = item.SaleStatus?(JYtype[item.type]):(ctSaleTypes[item.type])
 
                         return (
                             <div key={index}>
@@ -90,7 +92,7 @@ export default class CustomerList extends Component {
 
                     <WhiteSpace size="lg" />
                 {
-                    list[0].source==1&&<p className={styles.orderFooter}>具体的售后操作请在后台用电脑操作</p>
+                    list[0].source=='1'&&<p className={styles.orderFooter}>具体的售后操作请在后台用电脑操作</p>
                 }
             </WingBlank>
 

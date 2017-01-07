@@ -75,7 +75,7 @@ export default class ODetails extends Component {
                     <List  className="my-list">
                         <Item data-seed="logId">商品信息</Item>
                         {
-                            shopList.map((item,index)=>{
+                            shopList&&shopList.map((item,index)=>{
                          return    (   <div key={index}>
                                     <Item extra="商品名称 :" multipleLine align="top" wrap>
                                         {item.title}

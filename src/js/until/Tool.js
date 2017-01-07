@@ -15,4 +15,6 @@ Tool.paramType = data => {
     paramStr = '?' + paramStr;
     return paramStr
 }
-Tool.target= process.env.NODE_ENV !== 'production' ? '' : 'http://shopro.putaoevent.com';
+
+
+Tool.target= process.env.NODE_ENV !== 'production' ? 'http://192.168.0.112:8082/jymbms' : 'http://shopro.putaoevent.com';

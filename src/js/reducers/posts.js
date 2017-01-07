@@ -54,7 +54,3 @@ export const  posts= createReducer (init, {
 
 //根据action.subreddit 获取切换后的数据
 
-
-export const  postsBySubreddit = createReducer(Immutable.fromJS({}),{
-
-})
