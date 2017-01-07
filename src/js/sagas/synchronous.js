@@ -24,7 +24,11 @@ import {
 
 import {
     OPEN_THE_WINDOW,
-    CLOSE_THE_WINDOW
+    CLOSE_THE_WINDOW,
+    TIMER,
+    START,
+    STOP,
+    RESET
 } from '../actions/actionsTypes'
 
 
@@ -40,4 +44,26 @@ export function* prompt() {
     }
 }
 
+//timer
 
+function* timer() {
+    try {
+        while(true) {
+            yield call(delay, 1000)
+            yield put({type: TIMER})
+            yield put({type: RESET})
+        }
+    } finally {
+        if (yield cancelled()) {
+            console.log('噢，竟然取消了。。。。')
+        }
+    }
+}
+
+export function* watchTimer(){
+    while ( yield take(START) ) {
+        const bgTask = yield fork(timer)
+        yield take(STOP)
+        yield cancel(bgTask)
+    }
+}

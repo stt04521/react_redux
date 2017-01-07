@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import cs from '../../../images/超时时间图标_red.svg'
 import sy from '../../../images/剩余发货时间图标.svg'
 import styles from './index.scss'
+import moment from 'moment'
 import {Link} from  'react-router'
 import DeliveryButton from '../DeliveryButton'
 import { WingBlank, WhiteSpace,Card,Flex,Button} from 'antd-mobile';
@@ -60,8 +61,20 @@ export default class OrderData extends Component {
             }
         })
     }
+    componentDidMount() {
+        const { actions,list,timer} = this.props
+        list&&list.forEach((item)=>{
+            actions.onStart(timer.seconds,"true","s")
+        })
 
+    }
+    componentWillUnmount() {
+        const {actions} = this.props
+        actions.onStop()
+    }
     render(){
+
+        const {posts,timer,actions}= this.props;
         const {list,num,status} =this.props;
         let name = list[0].source==2?"九阳商城":"农村淘宝";
         let txt = status=="fh"?"待发货":"待抢"
@@ -82,12 +95,13 @@ export default class OrderData extends Component {
                                 "qd":<Grab detailAddr={item.detailAddr}/>,
                             }
 
+
                           return (
                               <div key={index}  >
 
                               <Card  >
                                 <Card.Header
-                                    title={<span className={style} >{item.timer}</span>}
+                                    title={<span className={style} > {moment(timer.seconds*1000).subtract(8, 'hours').format("HH:mm:ss")}</span>}
                                     thumb={title}
                                 />
                                 <Card.Body>

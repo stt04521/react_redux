@@ -4,12 +4,12 @@
 
 import React,{ Component } from 'react'
 import {Nav,NoData,OrderData} from '../../components'
-import * as PostActions from 'app/actions/PostActions'
+import * as Actions from 'app/actions'
 import { connect } from 'react-redux';
+import { is, fromJS} from 'immutable';
 import pureRender from 'pure-render-decorator';
 import { bindActionCreators } from 'redux'
 
-@pureRender
 class GrabASingle extends Component {
     state =
     {
@@ -56,20 +56,23 @@ class GrabASingle extends Component {
 
 
     componentDidMount() {
-        this.props.actions.onRequestPosts(`https://api.github.com/users`,{id:11111})
+        const { actions } = this.props
+        actions.onRequestPosts(`/changeorder/changeorderList`)
     }
-
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
+    // }
     render() {
-
-        const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.state
+            console.log("qd"+this.props.posts)
+        const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.props.posts.items
         return (
             <div ref="box" className="box">
                 {
-                    cuntaoList&&<OrderData num ={taobaoNum}  list={jiuyangList } status="qd"/>
+                    cuntaoList&&<OrderData num ={taobaoNum}  list={jiuyangList } status="qd" {...this.props}/>
 
                 }
                 {
-                    jiuyangList &&<OrderData num={jiuyangNum} list={cuntaoList} status="qd"/>
+                    jiuyangList &&<OrderData num={jiuyangNum} list={cuntaoList} status="qd" {...this.props}/>
 
                 }
                 {
@@ -83,11 +86,12 @@ class GrabASingle extends Component {
 }
 
 const mapStateToProps = state => ({
-    state: state.posts
+    posts: state.posts.toJS(),
+    timer:state.timer.toJS()
 })
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(PostActions, dispatch),
+    actions: bindActionCreators(Actions, dispatch),
 })
 
 export default connect(

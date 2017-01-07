@@ -6,12 +6,13 @@
 import { fork } from 'redux-saga/effects'
 import { watchPost } from './posts'
 import {watchGetData} from  './requestData'
-import {prompt} from  './synchronous'
+import {prompt,watchTimer} from  './synchronous'
 
 export default function* rootSaga() {
     yield [
         fork(watchGetData),
         fork(watchPost),
-        fork(prompt)
+        fork(prompt),
+        fork(watchTimer)
     ]
 }

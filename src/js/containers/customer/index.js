@@ -5,7 +5,7 @@
 
 import React,{ Component } from 'react'
 import {Nav,NoData,OrderData,CustomerList} from '../../components'
-import * as PostActions from 'app/actions/PostActions'
+import * as Actions from 'app/actions'
 import { connect } from 'react-redux';
 import pureRender from 'pure-render-decorator';
 import { bindActionCreators } from 'redux'
@@ -75,7 +75,8 @@ ctSaleTypes={
 
 
     componentDidMount() {
-    this.props.actions.onRequestPosts(`https://api.github.com/users`,{id:11111})
+        const { actions } = this.props
+        actions.onRequestPosts(`/sale/getsaleList`,{busiid:"8518800100000000006"})
 
     }
     // shouldComponentUpdate(nextProps, nextState) {
@@ -84,16 +85,16 @@ ctSaleTypes={
 
 render() {
 
-    const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.state;
+    const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.props.posts.items
 
     return (
         <div ref="box" className="box">
             {
-                cuntaoList&&<CustomerList num ={taobaoNum}  list={jiuyangList } jySaleStatus={this.jySaleStatus} />
+                cuntaoList&&<CustomerList num ={taobaoNum}  list={jiuyangList } jySaleStatus={this.props.jySaleStatus} ctSaleTypes={this.props.ctSaleTypes}/>
 
             }
             {
-                jiuyangList &&<CustomerList num={jiuyangNum} list={cuntaoList}  ctSaleTypes={this.ctSaleTypes}/>
+                jiuyangList &&<CustomerList num={jiuyangNum} list={cuntaoList}  ctSaleTypes={this.props.ctSaleTypes} jySaleStatus={this.props.jySaleStatus}/>
 
             }
             {
@@ -108,11 +109,13 @@ render() {
 
 
 const mapStateToProps = state => ({
-    state: state.posts
+    posts: state.posts.toJS(),
+    jySaleStatus:state.jySaleStatus.toJS(),
+    ctSaleTypes:state.ctSaleTypes.toJS()
 })
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(PostActions, dispatch),
+    actions: bindActionCreators(Actions, dispatch)
 })
 
 export default connect(

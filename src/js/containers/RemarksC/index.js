@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react'
-import {Remarks,Prompt} from '../../components'
+import {Remarks,Prompt} from 'app/components'
 import { connect } from 'react-redux';
 import { is, fromJS} from 'immutable';
 import { bindActionCreators } from 'redux'
