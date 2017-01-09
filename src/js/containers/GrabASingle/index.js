@@ -57,14 +57,14 @@ class GrabASingle extends Component {
 
     componentDidMount() {
         const { actions } = this.props
-        actions.onRequestPosts(`https://api.github.com/users`,{id:11111})
+        actions.onRequestPosts(`/changeorder/changeorderList`)
     }
     // shouldComponentUpdate(nextProps, nextState) {
     //     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
     // }
     render() {
-
-        const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.state
+            console.log("qd"+this.props.posts)
+        const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.props.posts.items
         return (
             <div ref="box" className="box">
                 {

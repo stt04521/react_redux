@@ -73,6 +73,7 @@ export default class OrderData extends Component {
         actions.onStop()
     }
     render(){
+
         const {posts,timer,actions}= this.props;
         const {list,num,status} =this.props;
         let name = list[0].source==2?"九阳商城":"农村淘宝";
