@@ -4,6 +4,7 @@ import styles from './index.scss'
 import { List,WingBlank, WhiteSpace,Flex,Button,InputItem} from 'antd-mobile';
 // include styles
 import 'rodal/lib/rodal.css';
+import { createForm } from 'rc-form';
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -12,7 +13,7 @@ class Popup extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { visible: false };
+        this.state = { visible: false,flag:false};
     }
 
     show() {
@@ -22,23 +23,36 @@ class Popup extends React.Component {
     hide() {
         this.setState({ visible: false });
     }
+    Check=(index)=>{
+        const {actions} = this.props;
+        actions.onSelectLogistics(index)
+        this.setState({ visible: false,flag:true});
+    }
 
+    componentWillUnmount (){
+        const {actions} = this.props;
+        actions.onrestLogistics()
+    }
     render() {
-
-            const  {courier}=this.props;
+        const { getFieldProps, getFieldError,getFieldValue} = this.props.form;
+            const  {courier,actions}=this.props;
+            let style = this.state.flag?styles.wl_black:styles.wl_button
 
         return (
             <div>
-
-
                 <List >
                     <Item multipleLine align="top" wrap >
-                        <button className={styles.wl_button} onClick={this.show.bind(this)}>请选择物流公司</button>
+                        <span className={style} onClick={this.show.bind(this)}>{courier.show.courierName}</span>
                     </Item>
 
                     <InputItem
+                        {...getFieldProps('required', {
+                            rules: [{required: true}],
+                            onChange(value){
+                                actions.onNumberofLogistics(value)
+                            }
+                        })}
                         placeholder="请输入物流单号"
-                        data-seed="logId"
                     ></InputItem>
 
                 </List>
@@ -54,9 +68,9 @@ class Popup extends React.Component {
                         <div className={styles.dialog_list}>
                             <List className="my-list">
                                 {
-                                    courier.map((item,index)=>{
+                                    courier.items&&courier.items.map((item,index)=>{
                                         return(
-                                            <Item  multipleLine align="top" wrap key={index}>
+                                            <Item  multipleLine align="top" wrap key={index} onClick={ev=>this.Check(index)}>
                                                 <WhiteSpace size="lg" />
                                                 {item.courierName}
                                                 <WhiteSpace size="lg" />
@@ -76,4 +90,4 @@ class Popup extends React.Component {
     }
 }
 
-export default Popup
+export default createForm()(Popup);

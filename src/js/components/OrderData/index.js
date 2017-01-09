@@ -104,7 +104,7 @@ export default class OrderData extends Component {
                                     thumb={title}
                                 />
                                 <Card.Body>
-                                    <div className="font-32" onClick={ev=>this.skip(item,status)}>
+                                    <div className="font-32" onClick={ev=>this.skip({tid:item.tid,source:item.source},status)}>
                                         {  item.shopList.map((tem, index)=> {
                                             return (
                                                 <div key={index}>

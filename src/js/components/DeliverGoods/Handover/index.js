@@ -11,30 +11,40 @@ const Item = List.Item;
 const Brief = Item.Brief;
 const TabPane = Tabs.TabPane;
 
-function callback(key) {
-    console.log(key);
-}
+
 
 export default class TabExample  extends Component{
+    callback=(key)=>{
+        const {actions} = this.props;
+        actions.onMainFromMentioning(key)
+    }
+    concat=(flag)=>{
+        const {actions} = this.props;
+        if(flag){
+            actions.onContactInformation(1)
+        }else{
+            actions.onContactInformation(2)
+        }
+
+    }
     render() {
-        let {courier,tid,source}=this.props;
-        console.log(source)
+        let {courier,tid,source,actions}=this.props;
         return (
             <div>
                 {
                     source==1&&<div>
                         <WhiteSpace />
-                        <Tabs defaultActiveKey="1" animated={false} onChange={callback}>
+                        <Tabs defaultActiveKey="1" animated={false} onChange={this.callback}>
                             <TabPane tab="邮寄" key="1">
                                 <div>
-                                    <Popup courier={courier} />
+                                    <Popup courier={courier} actions={actions} />
 
 
                                     <Flex style={{ padding: 30,backgroundColor:"white" }}>
                                         <Flex.Item>
                                             <div className={styles.option_item}>
-                                                <input type="radio" className={styles.survey_form_checkbox} name="answer_1" id="option_1_1" value="是" />
-                                                <label htmlFor={"option_1_1"}>
+                                                <input type="radio" className={styles.survey_form_checkbox} name="answer_1"  defaultChecked="defaultChecked" id="option_1_1" value="是" />
+                                                <label htmlFor={"option_1_1"} onClick={ev=>this.concat(true)}>
                                                     <i className={styles.survey_form_ui}></i>
                                                     <div className={styles.option_text}>
                                                         <p>自己联系</p>
@@ -45,10 +55,10 @@ export default class TabExample  extends Component{
                                         <Flex.Item>
                                             <div className={styles.option_item}>
                                                 <input type="radio" className={styles.survey_form_checkbox} name="answer_1" id="option_1_2" value="是" />
-                                                <label htmlFor={"option_1_2"}>
+                                                <label htmlFor={"option_1_2"} onClick={ev=>this.concat(false)}>
                                                     <i className={styles.survey_form_ui}></i>
                                                     <div className={styles.option_text}>
-                                                        <p>自己联系</p>
+                                                        <p>在线下单</p>
                                                     </div>
                                                 </label>
                                             </div>
@@ -90,7 +100,7 @@ export default class TabExample  extends Component{
                 {
                     source==2&&<div>
                         <WhiteSpace />
-                        <Popup courier={courier} />
+                        <Popup courier={courier} actions={actions} />
                     </div>
                 }
             </div>

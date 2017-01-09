@@ -4,6 +4,11 @@
 
 import React,{ Component } from 'react'
 import {DeliverGoods} from '../../components'
+import { connect } from 'react-redux';
+import pureRender from 'pure-render-decorator';
+import { is, fromJS} from 'immutable';
+import { bindActionCreators } from 'redux'
+import * as Actions from 'app/actions'
 
 
 class ShippingDetails extends Component{
@@ -26,7 +31,7 @@ class ShippingDetails extends Component{
                 "checked":false,
             },
             {
-                "oid": "001",
+                "oid": "002",
                 "title": "九阳Joyoung豆浆机D88G",
                 "num": 2,
                 "price": 1100.00,
@@ -34,33 +39,27 @@ class ShippingDetails extends Component{
             }
         ]
     }
-    courier= [{
-        "courierName":"物流公司名称",
-        "courierCode":"物流公司编码"
-    },{
-        "courierName":"物流公司名称",
-        "courierCode":"物流公司编码"
-    },{
-        "courierName":"物流公司名称",
-        "courierCode":"物流公司编码"
-    },{
-        "courierName":"物流公司名称",
-        "courierCode":"物流公司编码"
-    },{
-        "courierName":"物流公司名称",
-        "courierCode":"物流公司编码"
-    },{
-        "courierName":"物流公司名称",
-        "courierCode":"物流公司编码"
-    }
-    ]
+
 
 
     render(){
       return(
-          <DeliverGoods state={this.state} {...this.props} courier={this.courier}/>
+          <DeliverGoods state={this.state} {...this.props} />
       )
     }
 }
 
-export  default ShippingDetails
+const mapStateToProps = state => ({
+    posts: state.posts.toJS(),
+    select:state.select.toJS(),
+    courier:state.courier.toJS()
+})
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(Actions, dispatch)
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ShippingDetails)

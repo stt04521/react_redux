@@ -138,7 +138,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  posts: state.posts,
+  posts: state.posts.toJS(),
   timer:state.timer.toJS()
 })
 
