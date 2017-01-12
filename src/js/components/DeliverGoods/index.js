@@ -11,31 +11,12 @@ import Handover from  './Handover'
 
 
 export default class DeliverGoods extends Component {
-    componentDidMount() {
-
-     const   courier= [{
-            "courierName":"圆通",
-            "courierCode":"物流公司编码"
-        },{
-            "courierName":"顺丰",
-            "courierCode":"物流公司编码"
-        },{
-            "courierName":"物流公司名称",
-            "courierCode":"物流公司编码"
-        },{
-            "courierName":"物流公司名称",
-            "courierCode":"物流公司编码"
-        },{
-            "courierName":"物流公司名称",
-            "courierCode":"物流公司编码"
-        },{
-            "courierName":"物流公司名称",
-            "courierCode":"物流公司编码"
+    encodeUnicode=(str)=>{
+        var res = [];
+        for ( var i=0; i<str.length; i++ ) {
+            res[i] = ( "00" + str.charCodeAt(i).toString(16) ).slice(-4);
         }
-        ]
-        const {actions} = this.props;
-
-        actions.onReceiveLogistics(courier)
+        return "\\u" + res.join("\\u");
     }
     sumbit=()=>{
         let {select,courier}=this.props
@@ -56,14 +37,13 @@ export default class DeliverGoods extends Component {
             "logisticsname":courier.show.courierName,
             "courierCode":courier.show.courierCode,
             "courierNo":courier.Number,
-            "oids":string
+            "oids":string,
+            "userId":'8518300100000000006'
         }
         console.log(data)
 
         const {actions} = this.props;
-        actions.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {
-
-             },"stt")
+        actions.getDataStart('http://192.168.0.185:9991/jymbms/order/save_send',data,'/index')
 
     }
 

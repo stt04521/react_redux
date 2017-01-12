@@ -42,7 +42,7 @@ export default class DeliverList extends Component {
                         {recvMobile}
                     </Item>
                     <Item extra="买家留言 :" multipleLine align="top" wrap>
-                        {buyerMessage}
+                        {buyerMessage||" "}
                     </Item>
 
 

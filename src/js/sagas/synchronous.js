@@ -9,9 +9,11 @@ import {
     channel,
     eventChannel,
     END
+
 } from 'redux-saga'
 
 import {
+    getState,
     put,
     call,
     take,
@@ -28,7 +30,7 @@ import {
     TIMER,
     START,
     STOP,
-    RESET
+    RESET,
 } from '../actions/actionsTypes'
 
 
@@ -67,3 +69,4 @@ export function* watchTimer(){
         yield cancel(bgTask)
     }
 }
+

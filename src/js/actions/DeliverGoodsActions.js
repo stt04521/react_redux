@@ -12,7 +12,8 @@ import {
     NUMBER_OF_LOGISTICS,
     REDUCTION_SELECTION,
     MAIL_FROM_MENTIONING,
-    CONTACT_INFORMATION
+    CONTACT_INFORMATION,
+
 } from './actionsTypes'
 
 //selectAll
@@ -56,8 +57,8 @@ export const onMainFromMentioning=(mail)=>({
     type:MAIL_FROM_MENTIONING,
     mail
 })
-export const onContactInformation=(type)=>({
+export const onContactInformation=(Types)=>({
     type:CONTACT_INFORMATION,
-    type
+    Types
 })
 

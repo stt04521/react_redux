@@ -10,12 +10,25 @@ export const REQUEST_POSTS = 'REQUEST_POSTS'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const SELECT_SUBREDDIT = 'SELECT_REDDIT'
 export const INVALIDATA_REDDIT = 'INVALIDATA_REDDIT'
+export const RECEIVE_DELETE_DATA='RECEIVE_DELETE_DATA'
+
+//operation
+//Delete after pop
+export const SEND_DELETE_REQUEST='SEND_DELETE_REQUEST'
+export const DELETE_DATA = 'DELETE_DATA'
+
+//mark
+export const CHANGE_NOTES ='CHANGE_NOTES'
 
 //GetData
 export const GET_DATA_START = 'GET_DATA_START'
 export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS'
 export const TEST_DISPATCH = 'TEST_DISPATCH'
-
+//PostData
+export const POST_DATA_START = 'POST_DATA_START'
+export const POST_DATA_SUCCESS = 'POST_DATA_SUCCESS'
+export const ACCESS_TO_LOISTICS='ACCESS_TO_LOISTICS'
+export const SUCCESS_TO_LOISTICS='SUCCESS_TO_LOISTICS'
 
 //Prompt
 export const OPEN_THE_WINDOW ='OPEN_THE_WINDOW'
@@ -29,8 +42,6 @@ export const RESET = 'RESET'
 export const TIMER = 'TIMER'
 
 
-//Operation
-export const DELETE_DATA ='DELETE_DATA'
 
 
 //DeliverGoods
@@ -46,8 +57,7 @@ export const REDUCTION_SELECTION='REDUCTION_SELECTION'
 export const MAIL_FROM_MENTIONING='MAIL_FROM_MENTIONING'
 export const CONTACT_INFORMATION='CONTACT_INFORMATION'
 
-//Remark
-export const RECEIVE_MESSAGE='RECEIVE_MESSAGE'
+
 
 
 

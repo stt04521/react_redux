@@ -3,7 +3,7 @@
  */
 
 import React,{ Component } from 'react'
-import {Nav,NoData,OrderData} from '../../components'
+import {Nav,NoData,OrderData,Prompt} from '../../components'
 import * as Actions from 'app/actions'
 import { connect } from 'react-redux';
 import { is, fromJS} from 'immutable';
@@ -57,29 +57,29 @@ class GrabASingle extends Component {
 
     componentDidMount() {
         const { actions } = this.props
-        actions.onRequestPosts(`/changeorder/changeorderList`)
+        actions.onRequestPosts(`http://192.168.0.112:8082/jymbms/changeorder/changeorderList`)
     }
     // shouldComponentUpdate(nextProps, nextState) {
     //     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
     // }
     render() {
-            console.log("qd"+this.props.posts)
+        const {prompt} = this.props
         const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.props.posts.items
         return (
             <div ref="box" className="box">
                 {
-                    cuntaoList&&<OrderData num ={taobaoNum}  list={jiuyangList } status="qd" {...this.props}/>
+                    jiuyangList  &&<OrderData num ={jiuyangNum}  list={jiuyangList } status="qd" {...this.props}/>
 
                 }
                 {
-                    jiuyangList &&<OrderData num={jiuyangNum} list={cuntaoList} status="qd" {...this.props}/>
+                    cuntaoList &&<OrderData num={taobaoNum} list={cuntaoList} status="qd" {...this.props}/>
 
                 }
                 {
                     !jiuyangList && !cuntaoList &&  <NoData ntext="暂时没有单可抢"/>
 
                 }
-
+                <Prompt prompt={prompt} />
             </div>
         )
     }
@@ -87,7 +87,8 @@ class GrabASingle extends Component {
 
 const mapStateToProps = state => ({
     posts: state.posts.toJS(),
-    timer:state.timer.toJS()
+    timer:state.timer.toJS(),
+    prompt:state.prompt.toJS()
 })
 
 const mapDispatchToProps = dispatch => ({

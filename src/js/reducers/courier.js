@@ -48,6 +48,6 @@ export default createReducer(init,{
         send_type:action.mail=="2"?"自提":"邮寄"
     }),
     [CONTACT_INFORMATION]:(state,action)=>state.merge({
-        online:action.type=="2"?"在线下单":"自己联系"
+        online:action.Types=="2"?"在线下单":"自己联系"
     })
 })

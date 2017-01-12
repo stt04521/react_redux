@@ -17,14 +17,14 @@ const init=Immutable.fromJS({
 export const jySaleStatus = createReducer (init,{});
 
 const type=Immutable.fromJS({
-    "1":"仅退款",
-    "2":"退货退款",
-    "3":"补开发票",
-    "4":"补发配件/赠品",
-    "5":"快件追踪",
-    "6":"净水安装",
-    "7":"换货",
-    "8":"其他",
+    1:"仅退款",
+    2:"退货退款",
+    3:"补开发票",
+    4:"补发配件/赠品",
+    5:"快件追踪",
+    6:"净水安装",
+    7:"换货",
+    8:"其他",
 
 })
 
@@ -49,5 +49,5 @@ const de = Immutable.fromJS({
     ALL_CLOSED:"所有关闭的交易"
 })
 
-export const TradingStatus = createReducer (type,{})
+export const TradingStatus = createReducer (de,{})
 

@@ -8,9 +8,9 @@ import {
 
 
 export  const  openPrompt=(message)=>({
-  type:OPEN_THE_WINDOW,message,flag:true
+  type:OPEN_THE_WINDOW,message
 })
 
 export  const  closPrompt=()=>({
-    type:CLOSE_THE_WINDOW,flag:false
+    type:CLOSE_THE_WINDOW
 })

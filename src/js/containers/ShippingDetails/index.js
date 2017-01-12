@@ -3,7 +3,7 @@
  */
 
 import React,{ Component } from 'react'
-import {DeliverGoods} from '../../components'
+import {DeliverGoods,Prompt} from '../../components'
 import { connect } from 'react-redux';
 import pureRender from 'pure-render-decorator';
 import { is, fromJS} from 'immutable';
@@ -39,12 +39,28 @@ class ShippingDetails extends Component{
             }
         ]
     }
+    componentDidMount() {
+        const { actions } = this.props;
+        const {tid,source} = this.props.location.query;
 
+
+        actions.onRequestPosts('http://192.168.0.185:9991/jymbms/order/get_send',{tid:tid,source:source})
+
+        actions.onLoisticsPosts('http://192.168.0.185:9991/jymbms/order/get_courier',{busiid:'8518800100000000006',source:'2'})
+        //  actions.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {
+        //    alert(data)
+        //  },"stt")
+    }
 
 
     render(){
+        const {actions,prompt} = this.props
       return(
-          <DeliverGoods state={this.state} {...this.props} />
+          <div>
+              <DeliverGoods state={this.props.posts.items} {...this.props} />
+              <Prompt prompt={prompt} />
+          </div>
+
       )
     }
 }
@@ -52,7 +68,8 @@ class ShippingDetails extends Component{
 const mapStateToProps = state => ({
     posts: state.posts.toJS(),
     select:state.select.toJS(),
-    courier:state.courier.toJS()
+    courier:state.courier.toJS(),
+    prompt:state.prompt.toJS()
 })
 
 const mapDispatchToProps = dispatch => ({

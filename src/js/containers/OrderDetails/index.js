@@ -2,12 +2,12 @@
  * Created by Administrator on 2016/12/24.
  */
 import React,{ Component } from 'react'
-import {ODetails} from '../../components'
-import * as Actions from 'app/actions'
+import {ODetails,Prompt} from '../../components'
 import { connect } from 'react-redux';
-import { is, fromJS} from 'immutable';
 import pureRender from 'pure-render-decorator';
+import { is, fromJS} from 'immutable';
 import { bindActionCreators } from 'redux'
+import * as Actions from 'app/actions'
 
   class OrderDetails extends  Component{
       state={
@@ -36,60 +36,49 @@ import { bindActionCreators } from 'redux'
           ]
       }
 
-      jySaleStatus={
-          NO_REFUND:"无退款",
-          WAIT_SELLER_AGREE:"买家已经申请退款",
-          SELLER_REFUSE_BUYER:"卖家拒绝退款",
-          WAIT_BUYER_RETURN_GOODS:"卖家已经同意退款",
-          WAIT_SELLER_CONFIRM_GOODS:"买家已经退货",
-          WAIT_SELLER_SEND_GOODS:"等待买家退货",
-          CLOSED:"退款关闭",
-          SUCCESS:"退款成功"
-      }
-      constructor(props) {
-          super(props);
 
-      }
       componentDidMount() {
           const { actions } = this.props
+          let id = this.props.params.tid;
           let from = this.props.location.query.status
-          // alert(from)
-          if(from=='qd'){
-              actions.onRequestPosts(`/changeorder/getchangOrderinfo`,{tid:"2795125709389997",source:"1"})
-
-          }else{
+          let source = this.props.location.query.source
+          if(from=="qd"){
+              actions.onRequestPosts('http://192.168.0.112:8082/jymbms/changeorder/getchangOrderinfo',{tid:id,source:source})
+          }else {
+              actions.onRequestPosts('http://192.168.0.185:9991/jymbms/order/detail',{tid:id,source:source,userId:"111"})
 
           }
+          //  actions.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {
+          //    alert(data)
+          //  },"stt")
       }
-      //
-      // componentDidMount() {
-      //     const { actions } = this.props
-      //     actions.onRequestPosts(`http://localhost:8082/jymbms/changeorder/changeorderList`)
-      // }
 
     render(){
+        const {actions,prompt} = this.props
         let from = this.props.location.query.status
-        let state= this.props.posts.items
-        console.log(state)
-        return(
 
+        return(
+        <div>
             <ODetails
-                state={state}
+                state={this.props.posts.items}
                 from={from}
                 {...this.props}
-                jySaleStatus={this.props.jySaleStatus}/>
+                TradingStatus={this.props.TradingStatus}/>
+            <Prompt prompt={prompt} />
+        </div>
         )
     }
 }
 
-//获取状态树 数据
+
 const mapStateToProps = state => ({
     posts: state.posts.toJS(),
-    jySaleStatus:state.jySaleStatus.toJS()
+    TradingStatus:state.TradingStatus.toJS(),
+    prompt:state.prompt.toJS()
 })
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(Actions, dispatch),
+    actions: bindActionCreators(Actions, dispatch)
 })
 
 export default connect(

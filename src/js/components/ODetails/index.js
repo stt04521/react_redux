@@ -10,10 +10,26 @@ const Item = List.Item;
 const Brief = Item.Brief;
 
 export default class ODetails extends Component {
+    sure=(tid,source)=>{
+        const {actions} = this.props;
+        let data = {
+            tid:id,
+            source:source,
+            userId:111,
+            busiId:"8518800100000000006",
+            busiName:"武汉经销商",
+            account:"wuhan1",
+            nickname:""
+        }
+
+        actions.getDataStart('http://192.168.0.112:8082/jymbms/order/save_change_order',data,'/index/GrabASingle')
+    }
+
+
 
     render(){
 
-        let {state,jySaleStatus,from}=this.props;
+        let {state,TradingStatus,from,actions}=this.props;
         let {
                 tid,
                 status,
@@ -25,13 +41,20 @@ export default class ODetails extends Component {
                 buyerMessage,
                  shopList,
              }=state
-         let source = this.props.location.query.source;
+         let {source,Salestatus}= this.props.location.query;
+
          let title = source==2?"九阳商城":"农村淘宝";
          let id = this.props.params.tid;
          let txt = from=="fh"?"待发货":"待抢";
+         let result = TradingStatus[status]
          let arr ={
-             "fh":<DeliveryButton type="xq" data={{"tid":id,"source":source}}/>,
-             "qd": (<button className={styles.fh_foot}>快速抢单</button>)
+             "fh":<DeliveryButton
+                 type="xq"
+                 data={{"tid":id,"source":source}}
+                 actions={actions}
+                 status={Salestatus}
+             />,
+             "qd": (<button className={styles.fh_foot} onClick={ev=>this.sure(tid,source)} >快速抢单</button>)
          }
 
             return(
@@ -42,7 +65,7 @@ export default class ODetails extends Component {
                             {tid}
                         </Item>
                         <Item extra="交易状态 :" multipleLine align="top" wrap>
-                            {jySaleStatus[status]}
+                            {result}
                         </Item>
                         <Item extra="付款时间 :" multipleLine align="top" wrap>
                             {payTime}
@@ -66,7 +89,7 @@ export default class ODetails extends Component {
                             {recvMobile}
                         </Item>
                         <Item extra="买家留言 :" multipleLine align="top" wrap>
-                            {buyerMessage}
+                            {buyerMessage||" "}
                         </Item>
 
                         <WhiteSpace size="lg" />

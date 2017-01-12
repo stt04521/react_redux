@@ -5,28 +5,29 @@
 import {
     GET_DATA_START,
     GET_DATA_SUCCESS,
-    TEST_DISPATCH
+    TEST_DISPATCH,
+    POST_DATA_START,
+    POST_DATA_SUCCESS
 } from './actionsTypes'
 
 
 
-export  const getDataStart = (path, json, success,name) => {
+export  const getDataStart = (path, data, success, url,state) =>{
     return {
         type: GET_DATA_START,
         path,
-        json,
+        data,
         success,
-        name
+        url,
+        state
     }
 }
-
-
-const getDataSuccess = (path, json, success, name) => {
+export  const PostDataStart = (path, json, success,name) => {
     return {
-        type: GET_DATA_SUCCESS,
-        path ,
-        json ,
-        success ,
+        type: POST_DATA_START,
+        path,
+        json,
+        success,
         name
     }
 }

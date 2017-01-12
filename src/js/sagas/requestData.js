@@ -11,6 +11,7 @@ import {
     eventChannel,
     END
 } from 'redux-saga'
+import { browserHistory } from 'react-router'
 
 import {
     put,
@@ -29,7 +30,12 @@ import fetch from 'isomorphic-fetch'
 import {
     GET_DATA_START,
     GET_DATA_SUCCESS,
-    TEST_DISPATCH
+    SEND_DELETE_REQUEST,
+    DELETE_DATA,
+    OPEN_THE_WINDOW,
+    TEST_DISPATCH,
+    REQUEST_POSTS
+
 } from '../actions/actionsTypes'
 
 
@@ -43,10 +49,46 @@ function GetDataApi(path,postData) {
 
 function* GetData(action) {
     const json = yield call(GetDataApi,action.path,action.data)
-    yield  put({type: GET_DATA_SUCCESS,json,success:action.success,name:action.name})
+    yield  put({type: OPEN_THE_WINDOW,message:json})
+    yield call(delay, 2000)
+    if( json.status=="orderisoperated"||json.status=="success"){
+        // yield  put({type: GET_DATA_SUCCESS,json,success:action.success,name:action.name})
+        browserHistory.push({
+            pathname:action.url,
+            state:action.state
+        })
+    }
+
+
 }
 
 export function* watchGetData() {
 
     yield takeEvery(GET_DATA_START, GetData);
+}
+
+//发送请求并弹窗重新刷新页面
+function DeleteDataApi(path,postData) {
+    let url = Tool.target+path+Tool.paramType(postData)
+    return fetch(url)
+        .then(response => response.json())
+        .then(json =>Promise.resolve(json))
+}
+
+function* OpenTheWindow(action) {
+    const json = yield call(DeleteDataApi,action.path,action.data)
+    yield  put({type: OPEN_THE_WINDOW,message:json})
+
+    if( json.status=="orderisoperated"||json.status=="success"){
+        yield  put({type: REQUEST_POSTS,url:action.path2,data:action.data2})
+    }
+}
+
+export function* watchDeleteData() {
+    while(true) {
+        const action = yield take(SEND_DELETE_REQUEST)
+        const  type=yield call(OpenTheWindow, action)
+
+    }
+
 }

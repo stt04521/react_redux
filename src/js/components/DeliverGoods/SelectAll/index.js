@@ -15,14 +15,11 @@ const Item = List.Item;
         const {actions} = this.props;
             actions.onCheckAll(!flag)
     }
-    componentDidMount() {
-        const {actions,shopList} = this.props;
-        actions.onReceiveCheck(shopList)
-    }
+
     render() {
             const {select} = this.props
             let data = select.items
-
+            let object={"NO_REFUND":"NO_REFUND","SELLER_REFUSE_BUYER":"SELLER_REFUSE_BUYER","CLOSED":"CLOSED"}
         return (<div>
             <List >
                 <WhiteSpace size="lg" />
@@ -32,14 +29,16 @@ const Item = List.Item;
                     </CheckboxItem>
 
 
-                {select.items&&data.map((i,index) => {
+                {select.items.length>0&&data.map((i,index) => {
+                 let flag =i.checked=="false"||!i.checked?false:true;
+
                     return (
                         <div key={index}>
-                    <WhiteSpace size="lg" />
-                        <CheckboxItem  onClick={ev=>{this.onChange(index,i.checked)}} checked={i.checked} >
+                           <WhiteSpace size="lg" />
+                            {i.subStatus=="WAIT_SELLER_SEND_GOODS"&&object[i.saleStatus]&&<CheckboxItem  onClick={ev=>{this.onChange(index,flag)}} checked={flag} >
                             {i.title} <span className="fr"> X{i.num}</span>
                             <WhiteSpace size="lg" />
-                        </CheckboxItem>
+                        </CheckboxItem>}
 
                         </div>
                     )

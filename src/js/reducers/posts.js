@@ -6,7 +6,10 @@ import {
     REQUEST_POSTS,
     RECEIVE_POSTS,
     DELETE_DATA,
-    SELECT_SUBREDDIT
+    SELECT_SUBREDDIT,
+    SUCCESS_TO_LOISTICS,
+    CHANGE_NOTES
+
 } from '../actions/actionsTypes'
 import { createReducer } from 'redux-immutablejs'
 import Immutable from 'immutable';
@@ -25,7 +28,8 @@ export const  selectedsubreddit =createReducer (defalut,{
 
 const init = Immutable.fromJS({
     isFetching: false,
-    items: []
+    items: [],
+    courier:[]
 })
 
 
@@ -39,18 +43,28 @@ export const  posts= createReducer (init, {
             items: action.posts,
             lastUpdated: action.receivedAt
         }),
-
-        [DELETE_DATA]:(state,action)=>{
-            return state.mergeDeep({
-                items:state.getIn('items',action.source).map(item=>{
-                    if(item.id!=action.id){
-                        return item
-                    }
-                    }
-                )
+        [SUCCESS_TO_LOISTICS]:(state,action)=>state.merge({
+            isFetching: false,
+            courier: action.posts,
+            lastUpdated: action.receivedAt
+        }),
+        [CHANGE_NOTES]:(state,action)=>state.mergeDeep({
+           items:state.get('items').map((item,index)=>{
+               if(index==action.index){
+                   return item.set('remark',action.value)
+               }
+               return item
+           })
+        }),
+        [DELETE_DATA]:(state,action)=> {
+       console.log(state.getIn(['items', action.source]))
+            return     state.mergeDeep({
+                items:state.get('items').mergeDeep({
+                    [action.source]:state.getIn(['items', action.source]).filter((items, index)=>index!== action.index)})
             })
+
+
         }
     })
 
 //根据action.subreddit 获取切换后的数据
-

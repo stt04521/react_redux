@@ -13,25 +13,28 @@ import { createForm } from 'rc-form';
      constructor(props){
          super(props)
      }
-     handleChange=()=>{
-         // {
-         //     "source":"1",
-         //     "subid":"",//子订单编号
-         //     "remark":"",
-         //     "userId":""
-         // }
+     handleChange=(value,oid)=>{
+         const {getFieldValue}=this.props.form
+        let  data={
+             "source":this.props.location.query.source,
+             "subid":oid,//子订单编号
+             "remark":getFieldValue(value),
+             "userId":"8518300100000000006"
+         }
+
        const {actions} =this.props;
-         actions.openPrompt("ssss")
+         actions.getDataStart('http://192.168.0.185:9991/jymbms/order/save_remark',data,'/index')
+
      }
 
     render(){
-
-        const {list,posts}=this.props;
+        const { getFieldProps,getFieldValue} = this.props.form;
+        const {list,posts,actions}=this.props;
 
         return(
             <div>
                     {
-                        list&&list.map((item,index)=>{
+                        list.length>0&&list.map((item,index)=>{
 
                             return(
                                 <div key={index} >
@@ -42,9 +45,15 @@ import { createForm } from 'rc-form';
                                     <Card.Body>
                                         <div className="font-32" >
                                             <TextareaItem
-
+                                                {...getFieldProps('remark'+index, {
+                                                    rules: [{required: true}],
+                                                    onChange(value){
+                                                        actions.onChangeNotes(value,index)
+                                                    }
+                                                })}
                                                 rows={3}
                                                 placeholder="请填写备注"
+                                                value={item.remark}
                                             />
                                         </div>
                                     </Card.Body>
@@ -53,8 +62,8 @@ import { createForm } from 'rc-form';
                                            <WhiteSpace size="lg" />
                                            <Flex>
 
-                                               <Flex.Item><div className="hor-center"><Button className="btn" onClick={
-                                              this.handleChange
+                                               <Flex.Item><div className="hor-center"><Button className="btn" onClick={ev=>
+                                              this.handleChange('remark'+index,item.oid)
                                                } >保存备注</Button></div></Flex.Item>
 
                                            </Flex>
@@ -74,4 +83,4 @@ import { createForm } from 'rc-form';
     }
 }
 
-export  default Remarks
+export default createForm()(Remarks);

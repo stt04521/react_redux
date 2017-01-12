@@ -4,14 +4,13 @@
 
 import {
     REQUEST_POSTS,
-    RECEIVE_POSTS,
     DELETE_DATA,
-    SELECT_SUBREDDIT
+    ACCESS_TO_LOISTICS,
+    CHANGE_NOTES
 } from './actionsTypes'
 
 export const onRequestPosts = (url,data) => ({type: REQUEST_POSTS,url,data})
-export const onDeleteData = (id,source) => ({
-    type: DELETE_DATA,
-    id,
-    source
-})
+
+export const onLoisticsPosts = (url,data) => ({type: ACCESS_TO_LOISTICS,url,data})
+
+export const onChangeNotes = (value,index) => ({type: CHANGE_NOTES,value,index})

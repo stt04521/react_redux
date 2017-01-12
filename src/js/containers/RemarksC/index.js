@@ -26,15 +26,23 @@ import * as Actions from 'app/actions'
             "remark":"备注"
         }
     ]
-     shouldComponentUpdate(nextProps, nextState) {
-         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
+     // shouldComponentUpdate(nextProps, nextState) {
+     //     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
+     // }
+     componentDidMount() {
+         const { actions } = this.props
+         const {tid,source} = this.props.location.query;
+         actions.onRequestPosts('http://192.168.0.185:9991/jymbms/order/get_remark',{tid:tid,source:source})
+         //  actions.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {
+         //    alert(data)
+         //  },"stt")
      }
-
      render(){
+         console.log(this.props.posts.items)
         const {prompt} = this.props;
         return(
             <div>
-                <Remarks list={this.list}  {...this.props}/>
+                <Remarks list={this.props.posts.items}  {...this.props}/>
                 <Prompt prompt={prompt} />
             </div>
         )

@@ -76,7 +76,7 @@ ctSaleTypes={
 
     componentDidMount() {
         const { actions } = this.props
-        actions.onRequestPosts(`/sale/getsaleList`,{busiid:"8518800100000000006"})
+        actions.onRequestPosts(`http://192.168.0.112:8082/jymbms/sale/getsaleList`,{busiid:"8518800100000000006"})
 
     }
     // shouldComponentUpdate(nextProps, nextState) {
@@ -85,16 +85,16 @@ ctSaleTypes={
 
 render() {
 
-    const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.props.posts.items
+    const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.props.posts.items;
 
     return (
         <div ref="box" className="box">
             {
-                cuntaoList&&<CustomerList num ={taobaoNum}  list={jiuyangList } jySaleStatus={this.props.jySaleStatus} ctSaleTypes={this.props.ctSaleTypes}/>
+                jiuyangList &&<CustomerList num ={jiuyangNum}  list={jiuyangList } jySaleStatus={this.props.jySaleStatus} {...this.props}/>
 
             }
             {
-                jiuyangList &&<CustomerList num={jiuyangNum} list={cuntaoList}  ctSaleTypes={this.props.ctSaleTypes} jySaleStatus={this.props.jySaleStatus}/>
+                cuntaoList &&<CustomerList num={taobaoNum} list={cuntaoList}  ctSaleTypes={this.props.ctSaleTypes} {...this.props}/>
 
             }
             {
