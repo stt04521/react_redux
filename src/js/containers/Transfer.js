@@ -48,7 +48,6 @@ import * as Actions from 'app/actions'
      }
      componentWillMount () {
 
-
      }
      componentDidMount () {
          let that = this;
@@ -58,7 +57,7 @@ import * as Actions from 'app/actions'
          let code = this.getQueryString("code");
          let openid=localStorage.getItem("openid")?localStorage.getItem("openid"):"";
         const {actions} = this.props
-         actions.onSendWechatRequest('/getJyAdver',{url:href},'/getCustomerInfo',{code:code,openid:openid})
+         actions.onSendWechatRequest('/getJyAdver',{url:href},'/getCustomerInfo',{code:href,openid:openid})
      }
      skip=(url,data)=>{
          this.context.router.push({
