@@ -52,7 +52,10 @@
 }
 .am-card-body{
   border-top: 0px;
-
+  flex: inherit;
+}
+.am-modal-body{
+  height: auto;
 }
 .am-flexbox.am-flexbox-align-top{
   padding-left: 32px;

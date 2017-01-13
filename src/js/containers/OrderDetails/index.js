@@ -39,13 +39,14 @@ import * as Actions from 'app/actions'
 
       componentDidMount() {
           const { actions } = this.props
-          let id = this.props.params.tid;
+          let tid = this.props.params.tid;
           let from = this.props.location.query.status
           let source = this.props.location.query.source
+          let {id}=JSON.parse(sessionStorage.getItem('user'))
           if(from=="qd"){
-              actions.onRequestPosts('http://192.168.0.112:8082/jymbms/changeorder/getchangOrderinfo',{tid:id,source:source})
+              actions.onRequestPosts('/changeorder/getchangOrderinfo',{tid:tid,source:source})
           }else {
-              actions.onRequestPosts('http://192.168.0.185:9991/jymbms/order/detail',{tid:id,source:source,userId:"111"})
+              actions.onRequestPosts('/order/detail',{tid:tid,source:source,userId:id})
 
           }
           //  actions.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {

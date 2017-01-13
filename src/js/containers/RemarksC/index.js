@@ -32,7 +32,7 @@ import * as Actions from 'app/actions'
      componentDidMount() {
          const { actions } = this.props
          const {tid,source} = this.props.location.query;
-         actions.onRequestPosts('http://192.168.0.185:9991/jymbms/order/get_remark',{tid:tid,source:source})
+         actions.onRequestPosts('/order/get_remark',{tid:tid,source:source})
          //  actions.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {
          //    alert(data)
          //  },"stt")

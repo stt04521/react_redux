@@ -57,7 +57,7 @@ class GrabASingle extends Component {
 
     componentDidMount() {
         const { actions } = this.props
-        actions.onRequestPosts(`http://192.168.0.112:8082/jymbms/changeorder/changeorderList`)
+        actions.onRequestPosts(`/changeorder/changeorderList`)
     }
     // shouldComponentUpdate(nextProps, nextState) {
     //     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))

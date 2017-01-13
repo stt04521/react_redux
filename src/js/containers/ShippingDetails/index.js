@@ -42,11 +42,11 @@ class ShippingDetails extends Component{
     componentDidMount() {
         const { actions } = this.props;
         const {tid,source} = this.props.location.query;
+        let {busiId}=JSON.parse(sessionStorage.getItem('user'))
 
+        actions.onRequestPosts('/order/get_send',{tid:tid,source:source})
 
-        actions.onRequestPosts('http://192.168.0.185:9991/jymbms/order/get_send',{tid:tid,source:source})
-
-        actions.onLoisticsPosts('http://192.168.0.185:9991/jymbms/order/get_courier',{busiid:'8518800100000000006',source:'2'})
+        actions.onLoisticsPosts('/order/get_courier',{busiid:busiId,source:source})
         //  actions.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {
         //    alert(data)
         //  },"stt")

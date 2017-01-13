@@ -76,7 +76,8 @@ ctSaleTypes={
 
     componentDidMount() {
         const { actions } = this.props
-        actions.onRequestPosts(`http://192.168.0.112:8082/jymbms/sale/getsaleList`,{busiid:"8518800100000000006"})
+        let {busiId}=JSON.parse(sessionStorage.getItem('user'))
+        actions.onRequestPosts(`/sale/getsaleList`,{busiid:busiId})
 
     }
     // shouldComponentUpdate(nextProps, nextState) {

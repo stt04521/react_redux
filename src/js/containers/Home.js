@@ -104,8 +104,8 @@ class Home extends Component {
 
   componentDidMount() {
     const { actions } = this.props
-
-  actions.onRequestPosts('http://192.168.0.185:9991/jymbms/order/list',{busiid:"8518800100000000006"})
+    let {busiId}=JSON.parse(sessionStorage.getItem('user'))
+  actions.onRequestPosts('/order/list',{busiid:busiId})
    //  actions.getDataStart(`https://api.github.com/users`,{id:11111},function (data) {
    //    alert(data)
    //  },"stt")

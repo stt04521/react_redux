@@ -12,17 +12,17 @@ const Brief = Item.Brief;
 export default class ODetails extends Component {
     sure=(tid,source)=>{
         const {actions} = this.props;
+        let {busiId,id,busiName,account,nickname}=JSON.parse(sessionStorage.getItem('user'))
         let data = {
-            tid:id,
+            tid:tid,
             source:source,
-            userId:111,
-            busiId:"8518800100000000006",
-            busiName:"武汉经销商",
-            account:"wuhan1",
-            nickname:""
+            busiid:busiId,
+            busiName:busiName,
+            account:account,
+            nickname:nickname
         }
 
-        actions.getDataStart('http://192.168.0.112:8082/jymbms/order/save_change_order',data,'/index/GrabASingle')
+        actions.getDataStart('/changeorder/changOrder',data,'GrabASingle')
     }
 
 
@@ -101,7 +101,7 @@ export default class ODetails extends Component {
                             shopList&&shopList.map((item,index)=>{
                          return    (   <div key={index}>
                                     <Item extra="商品名称 :" multipleLine align="top" wrap>
-                                        {item.title}
+                                        <p className="textoverflow2">{item.title}</p>
                                     </Item>
                                     <Item extra="商品数量 :" multipleLine align="top" wrap>
                                         {item.num}

@@ -17,7 +17,7 @@ import {
 export default (
   <Route path="/" component={App}>
       <IndexRoute component={Transfer} />
-      <Route path="/index"  component={Main} >
+      <Route path="index"  component={Main} >
           <IndexRoute component={Home}/>
           <Route path="GrabASingle" component={GrabASingle} />
             <Route path="Customer" component={Customer} />

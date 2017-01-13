@@ -24,20 +24,18 @@ export default class DeliveryButton extends  Component{
     }
     sure=()=>{
         const {type,actions}=this.props;
+      let {busiId,id}=JSON.parse(sessionStorage.getItem('user'))
 
-        const that=this;
         if(type=="dd"){
 
-            const {actions,index,source,id} = this.props;
-
-
-            actions.onSendDeleteRequest('http://192.168.0.185:9991/jymbms/order/save_change_order',{tid:id,source:source,userId:111
-            },'http://192.168.0.185:9991/jymbms/order/list',{busiid:"8518800100000000006"})
+            const {actions,index,source,tid} = this.props;
+            actions.onSendDeleteRequest('/order/save_change_order',{tid:tid,source:source,userId:id
+            },'/order/list',{busiid:busiId})
 
         }else {
             const {tid,source} = this.props.data;
 
-            actions.getDataStart('http://192.168.0.185:9991/jymbms/order/save_change_order',{from:"xq",tid:tid,source:source,userId:111
+            actions.getDataStart('/order/save_change_order',{tid:tid,source:source,userId:id
             },'/index')
         }
 

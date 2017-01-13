@@ -6,7 +6,7 @@ import { Badge } from 'antd-mobile';
 
 export default class NavLink extends Component {
   render() {
-    const { pathUrl, active, icoName, linkName, ...rest } = this.props;
+    const { pathUrl, active, icoName, linkName,text,...rest} = this.props;
     return (
 
 
@@ -18,7 +18,7 @@ export default class NavLink extends Component {
     >
 
     <i className={icoName + ' ' + styles.ico} >
-      <Badge text={4} className={styles.ico_badge} />
+      <Badge text={text} className={styles.ico_badge} />
       </i>
     <span className={styles.text}>{linkName}</span>
 

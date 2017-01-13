@@ -13,17 +13,18 @@ import { createForm } from 'rc-form';
      constructor(props){
          super(props)
      }
-     handleChange=(value,oid)=>{
+     handleChange=(value,subid)=>{
          const {getFieldValue}=this.props.form
+         let {id}=JSON.parse(sessionStorage.getItem('user'))
         let  data={
              "source":this.props.location.query.source,
-             "subid":oid,//子订单编号
+             "subid":subid,//子订单编号
              "remark":getFieldValue(value),
-             "userId":"8518300100000000006"
+             "userId":id
          }
 
        const {actions} =this.props;
-         actions.getDataStart('http://192.168.0.185:9991/jymbms/order/save_remark',data,'/index')
+         actions.getDataStart('/order/save_remark',data,'/index')
 
      }
 
@@ -63,7 +64,7 @@ import { createForm } from 'rc-form';
                                            <Flex>
 
                                                <Flex.Item><div className="hor-center"><Button className="btn" onClick={ev=>
-                                              this.handleChange('remark'+index,item.oid)
+                                              this.handleChange('remark'+index,item.subid)
                                                } >保存备注</Button></div></Flex.Item>
 
                                            </Flex>

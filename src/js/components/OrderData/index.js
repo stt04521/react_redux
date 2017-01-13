@@ -3,8 +3,8 @@
  */
 
 import React, { Component } from 'react'
-import cs from '../../../images/超时时间图标_red.svg'
-import sy from '../../../images/剩余发货时间图标.svg'
+import cs from '../../../images/TimeoutIcon_red.svg'
+import sy from '../../../images/RemainingTime.svg'
 import styles from './index.scss'
 import moment from 'moment'
 import {Link} from  'react-router'
@@ -15,18 +15,18 @@ import { WingBlank, WhiteSpace,Card,Flex,Button} from 'antd-mobile';
 
 class Grab extends  Component{
     sure=()=>{
-        const {actions,source,id} = this.props;
+        const {actions,source,tid} = this.props;
+        let {busiId,busiName,account,nickname}=JSON.parse(sessionStorage.getItem('user'))
         let data = {
-            tid:id,
+            tid:tid,
             source:source,
-            userId:111,
-            busiId:"8518800100000000006",
-            busiName:"武汉经销商",
-            account:"wuhan1",
-            nickname:""
+            busiid:busiId,
+            busiName:busiName,
+            account:account,
+            nickname:nickname
         }
 
-        actions.onSendDeleteRequest('http://192.168.0.112:8082/jymbms/order/save_change_order',data,'http://192.168.0.112:8082/jymbms/changeorder/changeorderList')
+        actions.onSendDeleteRequest('/changeorder/changOrder',data,'/changeorder/changeorderList')
     }
     render(){
         const  {detailAddr}=this.props;
@@ -78,10 +78,10 @@ export default class OrderData extends Component {
         })
     }
     componentDidMount() {
-        // const { actions,list,timer} = this.props
-        // list.length>0&&list.forEach((item)=>{
-        //     actions.onStart(timer.seconds,"true","s")
-        // })
+        const { actions,list,timer} = this.props
+        list.length>0&&list.forEach((item)=>{
+            actions.onStart(timer.seconds,"true","s")
+        })
         // actions.onSendDeleteRequest('https://api.github.com/users',{id:"1111"})
 
             //
@@ -102,7 +102,8 @@ export default class OrderData extends Component {
         console.log(list)
         let name = list[0].source==2?"九阳商城":"农村淘宝";
 
-        let txt = status=="fh"?"待发货":"待抢"
+        let txt = status=="fh"?"待发货":"待抢";
+        console.log(status)
 
 
         return (
@@ -113,20 +114,20 @@ export default class OrderData extends Component {
                     <WhiteSpace size="sm" />
                         {list&&list.map((item,index)=>{
 
-                            let style = item.time_flg=="true"?styles.am_card_1:styles.am_card_2;
-                            let title =item.time_flg=="true"?sy:cs;
+                            let style = item.timeFlg=="true"?styles.am_card_1:styles.am_card_2;
+                            let title =item.timeFlg=="true"?sy:cs;
                             let arr={
                                 "fh":<DeliveryButton
                                     type='dd'
                                     data={item}
                                     actions={actions}
                                     index={index}
-                                    id={item.tid}
+                                    tid={item.tid}
                                     source={item.source}
                                     status={item.status}
                                 />,
                                 "qd":<Grab
-                                    id={item.tid}
+                                    tid={item.tid}
                                     detailAddr={item.detailAddr}
                                     actions={actions}
                                     source={item.source}
@@ -150,7 +151,7 @@ export default class OrderData extends Component {
 
                                             return (
                                                 <div key={index}>
-                                                    {status=="fh"&&tem.subStatus=="WAIT_SELLER_SEND_GOODS"&&(<div><p  className={styles.sp}>{tem.title} </p><span className="fr"> X{tem.num}</span></div>)}
+                                                    {tem.subStatus=="WAIT_SELLER_SEND_GOODS"&&(<div><p  className={styles.sp}>{tem.title} </p><span className="fr"> X{tem.num}</span></div>)}
                                                     {status=="qd"&&(<div><p  className={styles.sp}>{tem.title} </p><span className="fr"> X{tem.num}</span></div>)}
                                                 </div>
 

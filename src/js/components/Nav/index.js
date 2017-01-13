@@ -14,18 +14,21 @@ export default class Nav extends Component {
             active={styles.navOne}
             linkName="订单"
             onlyActiveOnIndex
+            text={"4"}
           />
           <NavLink
             pathUrl="/index/GrabASingle"
             icoName={styles.qd}
             active={styles.navTwo}
             linkName="抢单"
+            text={"4"}
           />
           <NavLink
             pathUrl="/index/Customer"
             icoName={styles.sh}
             active={styles.navThree}
             linkName="售后"
+            text={"4"}
           />
         </div>
       </div>

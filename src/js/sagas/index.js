@@ -4,8 +4,8 @@
  */
 // saga 模块化引入
 import { fork } from 'redux-saga/effects'
-import { watchPost,watchCourier} from './posts'
-import {watchGetData,watchDeleteData} from  './requestData'
+import { watchPost,watchCourier,} from './posts'
+import {watchGetData,watchDeleteData,watchSendWechat} from  './requestData'
 import {prompt,watchTimer} from  './synchronous'
 import {watchPostData} from './postsData'
 export default function* rootSaga() {
@@ -16,7 +16,7 @@ export default function* rootSaga() {
         fork(prompt),
         fork(watchPostData),
         fork(watchTimer),
-        fork(watchCourier)
-
+        fork(watchCourier),
+        fork(watchSendWechat)
     ]
 }

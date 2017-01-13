@@ -13,7 +13,7 @@ export default class NoData extends Component {
         return (
                 <div className={styles.Nodata}>
                     <div className={styles.Nodata_img} ><img src={bj} alt=""/></div>
-
+                    <p>{ntext}</p>
                 </div>
         )
         

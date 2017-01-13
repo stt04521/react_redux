@@ -23,7 +23,7 @@ export default class DeliverGoods extends Component {
         let list = select.items.filter((item,index)=>{
             return  item.checked==true
         }).map((i)=>{
-            return i.oid
+            return i.subid
         })
         let string=''
         for(let i=0;i<list.length;i++){
@@ -38,12 +38,12 @@ export default class DeliverGoods extends Component {
             "courierCode":courier.show.courierCode,
             "courierNo":courier.Number,
             "oids":string,
-            "userId":'8518300100000000006'
+            "userId":JSON.parse(sessionStorage.getItem('user')).id
         }
         console.log(data)
 
         const {actions} = this.props;
-        actions.getDataStart('http://192.168.0.185:9991/jymbms/order/save_send',data,'/index')
+        actions.getDataStart('/order/save_send',data,'/index')
 
     }
 
