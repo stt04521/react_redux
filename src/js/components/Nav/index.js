@@ -3,7 +3,15 @@ import NavLink from './NavLink'
 import styles from './index.scss'
 
 export default class Nav extends Component {
+
+    componentDidMount() {
+        const { actions } = this.props
+        let {busiId}=JSON.parse(sessionStorage.getItem('user'))
+        actions.onOrderQuantity({busiid:busiId})
+    }
+
   render() {
+   const {orderNum}= this.props
     return (
       <div>
         <div style={{height:'1.2rem'}}></div>
@@ -14,21 +22,21 @@ export default class Nav extends Component {
             active={styles.navOne}
             linkName="订单"
             onlyActiveOnIndex
-            text={"4"}
+            text={orderNum.orderNum}
           />
           <NavLink
             pathUrl="/index/GrabASingle"
             icoName={styles.qd}
             active={styles.navTwo}
             linkName="抢单"
-            text={"4"}
+            text={orderNum.grabASingleNum}
           />
           <NavLink
             pathUrl="/index/Customer"
             icoName={styles.sh}
             active={styles.navThree}
             linkName="售后"
-            text={"4"}
+            text={orderNum.customerNum}
           />
         </div>
       </div>

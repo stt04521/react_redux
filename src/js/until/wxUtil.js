@@ -4,7 +4,7 @@
 let React = require('react')
 
 let  WxUtil ={
-    debug:true,
+    debug:false,
     useWxJs:function () {
         let res= JSON.parse(sessionStorage.getItem("adver"));
         wx.config({

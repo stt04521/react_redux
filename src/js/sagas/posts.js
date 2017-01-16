@@ -31,7 +31,8 @@ import {
     ACCESS_TO_LOISTICS,
     SUCCESS_TO_LOISTICS,
     LOGISTICS_RECEIVE_DATA,
-    SELECT_RECEIVE_DATA
+    SELECT_RECEIVE_DATA,
+    GET_A_SINGLE_NUMBER
 } from '../actions/actionsTypes'
 
 //
@@ -45,17 +46,27 @@ function fetchPostsApi(path,postData) {
         .then(json =>Promise.resolve(json))
 }
 
+function add(value) {
+    return value.jiuyangNum+value.taobaoNum
+
+
+}
 function* fetchPosts(action) {
     const posts = yield call(fetchPostsApi,action.url,action.data)
     if(posts.shopList){
 
         yield put({type: SELECT_RECEIVE_DATA,json:posts.shopList})
     }
+    if(action.name){
+         const Num =yield call(add,posts)
+        yield  put({type: GET_A_SINGLE_NUMBER,name:action.name,num:Num})
+    }
+
     yield put({type: RECEIVE_POSTS, posts, receivedAt: moment().format("HH:mm:ss")})
 }
 
 export function* watchPost() {
-    yield takeEvery(REQUEST_POSTS, fetchPosts);
+    yield takeLatest(REQUEST_POSTS, fetchPosts);
 }
 
 function* fetchCourier(action) {

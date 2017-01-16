@@ -79,9 +79,9 @@ export default class OrderData extends Component {
     }
     componentDidMount() {
         const { actions,list,timer} = this.props
-        list.length>0&&list.forEach((item)=>{
-            actions.onStart(timer.seconds,"true","s")
-        })
+        // list.length>0&&list.forEach((item)=>{
+        //     actions.onStart(timer.seconds,"true","s")
+        // })
         // actions.onSendDeleteRequest('https://api.github.com/users',{id:"1111"})
 
             //
@@ -99,13 +99,10 @@ export default class OrderData extends Component {
     render(){
         const {posts,timer,actions}= this.props;
         const {list,num,status} =this.props;
-        console.log(list)
+
         let name = list[0].source==2?"九阳商城":"农村淘宝";
 
         let txt = status=="fh"?"待发货":"待抢";
-        console.log(status)
-
-
         return (
                 <WingBlank>
 

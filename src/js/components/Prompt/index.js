@@ -14,7 +14,6 @@ class Prompt extends React.Component{
     }
     render () {
             const  {flag,message}=this.props.prompt;
-            console.log(message)
          let style=flag?"show":"hide"
         return(
             <div className={`pop_up1 ${style}`} >

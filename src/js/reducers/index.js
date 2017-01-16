@@ -23,11 +23,13 @@ import timer from  './timer'
 import select from  './select'
 import courier from './courier'
 import postData from  './postData'
+import orderNum from './orderNum'
 
 const rootReducer = combineReducers({
     posts,
     jySaleStatus,
     ctSaleTypes,
+    orderNum,
     TradingStatus,
     requestData,
     prompt,
