@@ -13,7 +13,7 @@ import {
 } from 'redux-saga'
 import WxUtil from '../until/wxUtil'
 
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
 import {
     put,
@@ -61,7 +61,7 @@ function* GetData(action) {
 
     if( json.status=="orderisoperated"||json.status=="success"){
         // yield  put({type: GET_DATA_SUCCESS,json,success:action.success,name:action.name})
-        browserHistory.push({
+        hashHistory.push({
             pathname:action.url,
             state:action.state
         })
@@ -121,7 +121,7 @@ function* sendWechat(action) {
     if(user){
         localStorage.setItem("openid",user.openId)
         sessionStorage.setItem("user",JSON.stringify(user));
-        browserHistory.push({
+        hashHistory.push({
             pathname:'/index',
             state:''
         })

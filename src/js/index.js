@@ -4,7 +4,7 @@ import Immutable from 'immutable';
 import { AppContainer } from 'react-hot-loader'
 // import 'react-fastclick'  // 这个需要放到react下方才行
 import { render } from 'react-dom'
-import { browserHistory } from 'react-router'
+import {hashHistory  } from 'react-router'
 import Root from './containers/Root'
 import configureStore from './store/configureStore'
 import rootSage from './sagas'
@@ -20,7 +20,7 @@ store.runSaga(rootSage)
 try {
   render(
     <AppContainer>
-      <Root store={store} history={browserHistory} />
+      <Root store={store} history={hashHistory} />
     </AppContainer>,
     rootEl
   )
@@ -28,7 +28,7 @@ try {
   render(
     <RedBox error={e}>
       <AppContainer>
-        <Root store={store} history={browserHistory} />
+        <Root store={store} history={hashHistory} />
       </AppContainer>
     </RedBox>,
     rootEl
@@ -56,7 +56,7 @@ if (module.hot) {
     try {
       render(
         <AppContainer>
-          <NextApp history={browserHistory} />
+          <NextApp history={hashHistory} />
         </AppContainer>,
         rootEl
       )
@@ -64,7 +64,7 @@ if (module.hot) {
       render(
         <RedBox error={e}>
           <AppContainer>
-            <NextApp history={browserHistory} />
+            <NextApp history={hashHistory} />
           </AppContainer>
         </RedBox>,
         rootEl
