@@ -68,7 +68,7 @@ export default class ODetails extends Component {
                             {result}
                         </Item>
                         <Item extra="付款时间 :" multipleLine align="top" wrap>
-                            {payTime}
+                            {payTime||" "}
                         </Item>
                         <Item extra="实付金额 :" multipleLine align="top" wrap>
                             {payableAmt}

@@ -12,8 +12,16 @@ import {
     END
 } from 'redux-saga'
 import WxUtil from '../until/wxUtil'
+//
+import { hashHistory } from 'react-router'
 
-import { browserHistory } from 'react-router'
+// import { createHistory } from 'history';
+// import { useRouterHistory } from 'react-router'
+
+
+// const browserHistory = useRouterHistory(createHistory)({
+//     basename: '/jymbms'
+// });
 
 import {
     put,
@@ -61,7 +69,7 @@ function* GetData(action) {
 
     if( json.status=="orderisoperated"||json.status=="success"){
         // yield  put({type: GET_DATA_SUCCESS,json,success:action.success,name:action.name})
-        browserHistory.push({
+        hashHistory.push({
             pathname:action.url,
             state:action.state
         })
@@ -83,7 +91,7 @@ function* OpenTheWindow(action) {
     yield call(delay, 2000)
     yield put({type: CLOSE_THE_WINDOW})
     if( json.status=="orderisoperated"||json.status=="success"){
-        yield  put({type: REQUEST_POSTS,url:action.path2,data:action.data2})
+        yield  put({type: REQUEST_POSTS,url:action.path2,data:action.data2,name:action.name,time:'timer'})
     }
 }
 
@@ -91,17 +99,12 @@ export function* watchDeleteData() {
     yield* takeLatest(SEND_DELETE_REQUEST,OpenTheWindow)
 }
 //发送请求后配置微信 并且 保存用户与经销商id
-function GetDataApi2(path,postData) {
-    let url = Tool.target+path+Tool.paramType(postData)
-    return fetch(url)
-        .then(response => response.json())
-        .then(json =>Promise.resolve(json))
-}
+
 
 function configuration(posts) {
     sessionStorage.setItem("adver",JSON.stringify(posts));
     WxUtil.useWxJs();
-    // wx.ready(function() {
+    wx.ready(function() {
         wx.hideMenuItems({
             // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
             menuList: ["menuItem:share:qq", "menuItem:share:weiboApp",
@@ -110,21 +113,28 @@ function configuration(posts) {
                 "menuItem:copyUrl", "menuItem:openWithQQBrowser",
                 "menuItem:openWithSafari", "menuItem:share:email", "chooseWXPay"]
         });
-    // })
+    })
 }
 
 function* sendWechat(action) {
+
     const posts = yield call(GetDataApi,action.path,action.data)
-     // yield call(configuration,posts)
+
+     //yield call(configuration,posts)
     const user = yield call(GetDataApi,action.path2,action.data2)
-    console.log(user)
+
+
     if(user){
+
         localStorage.setItem("openid",user.openId)
         sessionStorage.setItem("user",JSON.stringify(user));
-        browserHistory.push({
+
+        hashHistory.push({
             pathname:'/index',
             state:''
         })
+
+
     }
 
 }

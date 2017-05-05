@@ -6,11 +6,12 @@ import {
     DELETE_DATA
 } from './actionsTypes'
 
-export const onSendDeleteRequest =(path,data,path2,data2)=>({
+export const onSendDeleteRequest =(path,data,path2,data2,name)=>({
     type:SEND_DELETE_REQUEST,
     path,
     data,
     path2,
-    data2
+    data2,
+    name
 })
 

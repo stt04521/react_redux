@@ -42,8 +42,12 @@ export const CLOSE_THE_WINDOW ='CLOSE_THE_WINDOW'
 
 
 // Timer
-export const START = 'START'
+export const UPDATE_JY_TIME = 'UPDATE_JY_TIME'
+export const UPDATE_CT_TIME = 'UPDATE_CT_TIME'
+export const TIMER_RECEIVE_DATA='TIMER_RECEIVE_DATA'
+export const TIMER_TAOBAO_DATA='TIMER_TAOBAO_DATA'
 export const STOP = 'STOP'
+export const STOP_CT ='STOP_CT'
 export const RESET = 'RESET'
 export const TIMER = 'TIMER'
 

@@ -30,7 +30,7 @@ export default class DeliveryButton extends  Component{
 
             const {actions,index,source,tid} = this.props;
             actions.onSendDeleteRequest('/order/save_change_order',{tid:tid,source:source,userId:id
-            },'/order/list',{busiid:busiId})
+            },'/order/list',{busiid:busiId},"orderNum")
 
         }else {
             const {tid,source} = this.props.data;

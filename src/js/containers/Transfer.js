@@ -51,15 +51,15 @@ import * as Actions from 'app/actions'
      }
      componentDidMount () {
          let that = this;
-         let href = location.href.split("#")[0];
+         var href = location.href.split("#")[0];
          //用户同意授权 获取code
          //进入中转页面时 对微信进行配置
          let code = this.getQueryString("code");
          let openid=localStorage.getItem("openid")?localStorage.getItem("openid"):"";
         const {actions} = this.props
-         actions.onSendWechatRequest('/getJyAdver',{url:'111'},'/getCustomerInfo',{code:'111',openid:'ozoOtuMCsZe3Kjr8kweVI4l_rdJg'})
+         actions.onSendWechatRequest('/getJyAdver',{url:'111'},'/getCustomerInfo',{code:'111',openid:'ozoOtuG1bhR0EW8WJyjO0s2-Jamo'})
          // actions.onSendWechatRequest('/getJyAdver',{url:href},'/getCustomerInfo',{code:code,openid:openid})
-     }
+}
      skip=(url,data)=>{
          this.context.router.push({
              pathname:url,

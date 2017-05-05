@@ -40,7 +40,7 @@ export default class DeliverGoods extends Component {
             "oids":string,
             "userId":JSON.parse(sessionStorage.getItem('user')).id
         }
-        console.log(data)
+
 
         const {actions} = this.props;
         actions.getDataStart('/order/save_send',data,'/index')

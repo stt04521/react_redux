@@ -103,20 +103,29 @@ class Home extends Component {
 
 
   componentDidMount() {
+
     const { actions } = this.props
     let {busiId}=JSON.parse(sessionStorage.getItem('user'))
     // actions.onOrderQuantity({busiid:busiId})
-   actions.onRequestPosts('/order/list',{busiid:busiId})
+   actions.onRequestPosts('/order/list',{busiid:busiId},'','timer')
+
+
 
   }
   // shouldComponentUpdate(nextProps, nextState) {
   //   return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
   // }
-
+  componentWillUnmount() {
+    const {actions} = this.props
+    actions.onStop()
+  }
   render() {
   // console.log(this.getDate())
     const {actions,prompt} = this.props
     const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.props.posts.items
+
+
+
     return (
         <div ref="box" className="box">
           {

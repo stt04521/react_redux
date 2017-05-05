@@ -11,7 +11,7 @@ import {
     REQUEST_ORDER_QUANTITY
 } from './actionsTypes'
 
-export const onRequestPosts = (url,data,name) => ({type: REQUEST_POSTS,url,data,name})
+export const onRequestPosts = (url,data,name,time) => ({type: REQUEST_POSTS,url,data,name,time})
 
 export const onLoisticsPosts = (url,data) => ({type: ACCESS_TO_LOISTICS,url,data})
 

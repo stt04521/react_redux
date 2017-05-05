@@ -8,7 +8,7 @@ let  WxUtil ={
     useWxJs:function () {
         let res= JSON.parse(sessionStorage.getItem("adver"));
         wx.config({
-            debug : false,
+            debug : true,
             appId :res.appId,
             timestamp : res.timestamp,
             nonceStr : res.nonceStr,

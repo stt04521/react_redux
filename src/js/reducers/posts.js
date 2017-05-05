@@ -57,7 +57,7 @@ export const  posts= createReducer (init, {
            })
         }),
         [DELETE_DATA]:(state,action)=> {
-       console.log(state.getIn(['items', action.source]))
+
             return     state.mergeDeep({
                 items:state.get('items').mergeDeep({
                     [action.source]:state.getIn(['items', action.source]).filter((items, index)=>index!== action.index)})

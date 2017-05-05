@@ -30,7 +30,7 @@ import {
     POST_DATA_SUCCESS,
     POST_DATA_START
 } from '../actions/actionsTypes'
-
+import {getOrderNum} from './selectors'
 
 // 手动获取数据，开始！
 function PostDataApi(path,postData) {

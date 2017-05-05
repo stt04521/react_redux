@@ -26,7 +26,7 @@ class Grab extends  Component{
             nickname:nickname
         }
 
-        actions.onSendDeleteRequest('/changeorder/changOrder',data,'/changeorder/changeorderList')
+        actions.onSendDeleteRequest('/changeorder/changOrder',data,'/changeorder/changeorderList',{},'grabASingleNum')
     }
     render(){
         const  {detailAddr}=this.props;
@@ -79,6 +79,13 @@ export default class OrderData extends Component {
     }
     componentDidMount() {
         const { actions,list,timer} = this.props
+        // if(list[0].source==2){
+        //     actions.onReceiveTimer(list)
+        // }else {
+        //     actions.onReceiveTaobao(list)
+        // }
+
+
         // list.length>0&&list.forEach((item)=>{
         //     actions.onStart(timer.seconds,"true","s")
         // })
@@ -92,15 +99,13 @@ export default class OrderData extends Component {
             //  },"stt")
 
     }
-    componentWillUnmount() {
-        const {actions} = this.props
-        actions.onStop()
-    }
+
+
     render(){
         const {posts,timer,actions}= this.props;
         const {list,num,status} =this.props;
-
         let name = list[0].source==2?"九阳商城":"农村淘宝";
+        let main =list[0].source==2?timer.items:timer.taobao;
 
         let txt = status=="fh"?"待发货":"待抢";
         return (
@@ -109,7 +114,7 @@ export default class OrderData extends Component {
                     <WhiteSpace size="lg" />
                     <p className={styles.orderTitle}>{name}剩余{num}单{txt}</p>
                     <WhiteSpace size="sm" />
-                        {list&&list.map((item,index)=>{
+                        {main&&main.map((item,index)=>{
 
                             let style = item.timeFlg=="true"?styles.am_card_1:styles.am_card_2;
                             let title =item.timeFlg=="true"?sy:cs;
@@ -139,8 +144,8 @@ export default class OrderData extends Component {
 
                               <Card  >
                                 <Card.Header
-                                    title={<span className={style} > {moment(timer.seconds*1000).subtract(8, 'hours').format("HH:mm:ss")}</span>}
-                                    thumb={title}
+                                    title={item.timeFlg&&<span className={style} > {item.fhTime}</span>}
+                                    thumb={item.timeFlg&&title}
                                 />
                                 <Card.Body>
                                     <div className="font-32" onClick={ev=>this.skip({tid:item.tid,source:item.source,status:item.status},status)}>
@@ -148,7 +153,7 @@ export default class OrderData extends Component {
 
                                             return (
                                                 <div key={index}>
-                                                    {tem.subStatus=="WAIT_SELLER_SEND_GOODS"&&(<div><p  className={styles.sp}>{tem.title} </p><span className="fr"> X{tem.num}</span></div>)}
+                                                    {status=="fh"&&tem.subStatus=="WAIT_SELLER_SEND_GOODS"&&(<div><p  className={styles.sp}>{tem.title} </p><span className="fr"> X{tem.num}</span></div>)}
                                                     {status=="qd"&&(<div><p  className={styles.sp}>{tem.title} </p><span className="fr"> X{tem.num}</span></div>)}
                                                 </div>
 

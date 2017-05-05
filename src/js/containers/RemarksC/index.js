@@ -38,7 +38,7 @@ import * as Actions from 'app/actions'
          //  },"stt")
      }
      render(){
-         console.log(this.props.posts.items)
+
         const {prompt} = this.props;
         return(
             <div>

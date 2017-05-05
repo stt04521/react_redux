@@ -3,26 +3,35 @@
  */
 
 
-import { START, STOP, RESET, TIMER} from '../actions/actionsTypes'
+import { STOP,STOP_CT, RESET, TIMER,TIMER_RECEIVE_DATA,TIMER_TAOBAO_DATA,UPDATE_JY_TIME,UPDATE_CT_TIME} from '../actions/actionsTypes'
 import { createReducer } from 'redux-immutablejs'
 import Immutable from 'immutable';
 
 const init = Immutable.fromJS({
-    seconds: 4,
-    status: 'Stopped'
+    items:'',
+    taobao:''
 })
 
 export default createReducer(init,{
-    [START]:(state,action)=>state.merge({
-        status: 'Running',
-        seconds:action.seconds?action.seconds: state.get('seconds'),
-        flag:action.flag,
-        name:action.name
+    [TIMER_TAOBAO_DATA]:(state,action)=>state.merge({
+        taobao:action.json
     }),
-    [STOP]:(state,action)=>state.merge({
-        status: 'Stopped',
-        seconds:state.get('seconds'),
+    [TIMER_RECEIVE_DATA]:(state,action)=>state.merge({
+        items:action.json
     }),
+    [UPDATE_JY_TIME]:(state,action)=>state.mergeDeep({
+        items:state.get('items').map((item,index)=>{
+        const {time,flag} =action.json[index]
+            return item.set("fhTime",time).set("timeFlg",flag)
+        })
+    }),
+    [UPDATE_CT_TIME]:(state,action)=>state.mergeDeep({
+        taobao:state.get('taobao').map((item,index)=>{
+            const {time,flag} =action.json[index]
+            return item.set("fhTime",time).set("timeFlg",flag)
+        })
+    }),
+    [STOP]:(state,action)=>state,
     [RESET]:(state,action)=>state.merge({
         flag:state.get('seconds')==0?false:state.get('flag')
     }),

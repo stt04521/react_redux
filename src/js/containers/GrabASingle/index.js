@@ -57,11 +57,15 @@ class GrabASingle extends Component {
 
     componentDidMount() {
         const { actions } = this.props
-        actions.onRequestPosts(`/changeorder/changeorderList`)
+        actions.onRequestPosts(`/changeorder/changeorderList`,{},'grabASingleNum','timer')
     }
     // shouldComponentUpdate(nextProps, nextState) {
     //     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
     // }
+    componentWillUnmount() {
+        const {actions} = this.props
+        actions.onStop()
+    }
     render() {
         const {prompt} = this.props
         const { taobaoNum, jiuyangNum, cuntaoList, jiuyangList } = this.props.posts.items
