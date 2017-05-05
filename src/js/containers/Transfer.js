@@ -57,8 +57,8 @@ import * as Actions from 'app/actions'
          let code = this.getQueryString("code");
          let openid=localStorage.getItem("openid")?localStorage.getItem("openid"):"";
         const {actions} = this.props
-         actions.onSendWechatRequest('/getJyAdver',{url:'111'},'/getCustomerInfo',{code:'111',openid:'ozoOtuG1bhR0EW8WJyjO0s2-Jamo'})
-         // actions.onSendWechatRequest('/getJyAdver',{url:href},'/getCustomerInfo',{code:code,openid:openid})
+         // actions.onSendWechatRequest('/getJyAdver',{url:'111'},'/getCustomerInfo',{code:'111',openid:'ozoOtuG1bhR0EW8WJyjO0s2-Jamo'})
+         actions.onSendWechatRequest('/getJyAdver',{url:href},'/getCustomerInfo',{code:code,openid:openid})
 }
      skip=(url,data)=>{
          this.context.router.push({
