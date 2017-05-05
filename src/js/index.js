@@ -4,17 +4,12 @@ import Immutable from 'immutable';
 import { AppContainer } from 'react-hot-loader'
 // import 'react-fastclick'  // 这个需要放到react下方才行
 import { render } from 'react-dom'
-// import { useBasename } from 'history'
-import { hashHistory } from 'react-router'
-// import { createHistory } from 'history';
-// import { useRouterHistory } from 'react-router';
+import {hashHistory  } from 'react-router'
 import Root from './containers/Root'
 import configureStore from './store/configureStore'
 import rootSage from './sagas'
 
-// const browserHistory = useRouterHistory(createHistory)({
-//   basename: '/jymbms'
-// });
+
 
 const RedBox = require('redbox-react').default;
 const rootEl = document.getElementById('app');
